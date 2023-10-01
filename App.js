@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { View, FlatList, Text } from 'react-native';
-import { Button, Overlay, CheckBox, Card } from 'react-native-elements';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import { View, FlatList } from 'react-native';
+import { Button } from 'react-native-elements';
+import AlarmCard from './components/AlarmCard';
 import AlarmSettingOverlay from './components/AlarmSettingOverlay';
 
 export default function App() {
