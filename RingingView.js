@@ -1,25 +1,53 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
-import Timer from "./Timer";
+import React, { useState } from "react";
+import { Text, StyleSheet, View, TouchableHighlight, TouchableOpacity } from "react-native";
+import { Stopwatch, Timer } from 'react-native-stopwatch-timer'
 
 const RingingView = () => {
-  const time = new Date();
-  return (
+
+  const [isTimeRunning, setIsTimeRunning] = useState(false);
+
+  return(
     <View style={styles.container}>
-      <Timer expiryTimestamp={time} />
+      <Text style={styles.body}>Testing Timer</Text>
+      <Stopwatch laps msecs start={isTimeRunning} options={options}/>
+      <TouchableOpacity onPress={()=>setIsTimeRunning(!isTimeRunning)} style={styles.touchableOpacity}>
+        <Text style={styles.body}>Start/Stop</Text>
+      </TouchableOpacity>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
-  container: {
-    width: "100%",
-    height: "100%",
+  container:{
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
+  body:{
+    fontSize: 30,
+    color: '#000',
+  },
+  touchableOpacity:{
+    backgroundColor: '#6495ed',
+    fontSize: 30,
+    marginTop: 30,
+    padding: 10,
+    borderRadius: 100,
+  }
 });
+
+const options = {
+  container: {
+    backgroundColor: 'transparent',
+    borderRadius: 100,
+    width: 320,
+  },
+  text: {
+    fontSize: 40,
+    color: 'red',
+    marginLeft: 30,
+  }
+};
 
 export default RingingView;

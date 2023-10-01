@@ -2,14 +2,14 @@ import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import RingingView from './RingingView';
-import Timer from './Timer';
+import TimeCounter from './RingingView';
 
 export default function App() {
   const [isRinging, setIsRinging] = useState(false);
   return (
     <View style={styles.container}>
       <Text>やったぜー！</Text>
-      <Timer expiryTimestamp={new Date()} />
+      <RingingView />
     </View>
   );
 }
