@@ -1,15 +1,18 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
-import Timer from "./Timer";
+import React, { useState } from "react";
+import { Text, StyleSheet, View } from "react-native";
 
-const RingingView = () => {
-  const time = new Date();
-  return (
+const Timer = () => {
+
+  const [time, setTime] = useState(0);
+
+  const startTimer = ()=>{};
+
+  return(
     <View style={styles.container}>
-      <Timer expiryTimestamp={time} />
+      <Text>{}</Text>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -22,4 +25,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RingingView;
+export default Timer;
