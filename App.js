@@ -38,16 +38,7 @@ export default function App() {
         data={alarms}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
-          <Card containerStyle={{ marginTop: 40 }}>
-            <Card.Title>アラーム設定</Card.Title>
-            <Card.Divider />
-            <Text style={{ marginBottom: 10 }}>
-              時刻: {item.time.toString()}
-            </Text>
-            <Text style={{ marginBottom: 10 }}>
-              曜日: {JSON.stringify(item.days)}
-            </Text>
-          </Card>
+          <AlarmCard time={item.time} days={item.days} />
         )}
       />
       <Button title="アラーム設定" onPress={toggleOverlay} containerStyle={{ marginBottom: 30 }} />
