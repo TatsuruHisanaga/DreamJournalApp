@@ -34,6 +34,7 @@ export default function App() {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <RankingView />
       <FlatList
         data={alarms}
         keyExtractor={(item, index) => index.toString()}
@@ -51,7 +52,6 @@ export default function App() {
         days={days}
         setDays={setDays}
       />
-      <RankingView />
     </View>
   );
 }
