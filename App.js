@@ -27,7 +27,30 @@ export default function App() {
 
   const addAlarm = () => {
     setAlarms([...alarms, { time, days }]);
+    scheduleNotification(time);
     toggleOverlay();
+  };
+
+  const scheduleNotification = async (time) => {
+    try {
+      // 通知内容の設定
+      const notification = {
+        title: 'アラーム',
+        body: '時間です！',
+        sound: 'default', // iOSのみ
+      };
+      // スケジュール設定
+      const schedulingOptions = {
+        content: notification,
+        trigger: {
+          seconds: Math.floor((time.getTime() - Date.now()) / 1000), // 次のアラームまでの秒数
+        },
+      };
+      // 通知をスケジュール
+      await Notifications.scheduleNotificationAsync(schedulingOptions);
+    } catch (error) {
+      console.error('Notification scheduling failed: ', error);
+    }
   };
 
   const onTimeChange = (e, selectedTime) => {
