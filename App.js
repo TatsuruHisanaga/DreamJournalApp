@@ -4,6 +4,8 @@ import { Button } from 'react-native-elements';
 import AlarmCard from './components/AlarmCard';
 import AlarmSettingOverlay from './components/AlarmSettingOverlay';
 import RankingView from './RankingView';
+import * as Notifications from 'expo-notifications';
+Notifications.requestPermissionsAsync();
 
 export default function App() {
   const [alarms, setAlarms] = useState([]);
