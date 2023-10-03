@@ -4,6 +4,7 @@ import { Button } from 'react-native-elements';
 import AlarmCard from './components/AlarmCard';
 import AlarmSettingOverlay from './components/AlarmSettingOverlay';
 import RankingView from './RankingView';
+import DreamJournalModal from './components/DreamJournalModal';
 
 export default function App() {
   const [alarms, setAlarms] = useState([]);
@@ -35,6 +36,7 @@ export default function App() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <RankingView />
+      <DreamJournalModal />
       <FlatList
         data={alarms}
         keyExtractor={(item, index) => index.toString()}

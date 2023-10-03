@@ -11,7 +11,7 @@ import {
 import TagSelector from './TagSelector';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function DreamJournalScreen() {
+export default function DreamJournalModal() {
   const [title, setTitle] = useState('');
   const [details, setDetails] = useState('');
   const [selectedTags, setSelectedTags] = useState([]);
