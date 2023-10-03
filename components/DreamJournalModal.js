@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import TagSelector from './TagSelector';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function DreamJournalScreen() {
   const [title, setTitle] = useState('');
@@ -16,6 +17,26 @@ export default function DreamJournalScreen() {
   const [selectedTags, setSelectedTags] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
 
+  const handleSave = async () => {
+    try {
+      const dreamJournalData = { title, details, selectedTags };
+      const storedData = await AsyncStorage.getItem('dreamJournal');
+      let storedDataArray = [];
+
+      if (storedData) {
+        storedDataArray = JSON.parse(storedData);
+      }
+
+      storedDataArray.push(dreamJournalData);
+      await AsyncStorage.setItem(
+        'dreamJournal',
+        JSON.stringify(storedDataArray)
+      );
+      console.log('Saved:', dreamJournalData);
+    } catch (error) {
+      console.error('Could not save data', error);
+    }
+  };
 
   return (
     <View style={styles.container}>
