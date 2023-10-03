@@ -37,7 +37,7 @@ export default function TagSelector({ selectedTags, setSelectedTags }) {
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 16,
+    margin: 16,
   },
   label: {
     fontSize: 16,

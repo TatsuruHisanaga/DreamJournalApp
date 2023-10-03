@@ -83,22 +83,34 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
+    margin: 16,
   },
   label: {
-    fontSize: 16,
+    fontSize: 18,
+    fontWeight: 'bold',
     marginBottom: 8,
+    margin: 16,
   },
   input: {
     borderWidth: 1,
     borderColor: '#ccc',
-    padding: 8,
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 0,
+    marginRight: 16,
     marginBottom: 16,
+    marginLeft: 16,
   },
+  
   textArea: {
     borderWidth: 1,
     borderColor: '#ccc',
-    padding: 8,
+    padding: 10,
+    borderRadius: 5,
     height: 100,
+    marginTop: 0,
+    marginRight: 16,
     marginBottom: 16,
+    marginLeft: 16,
   },
 });
