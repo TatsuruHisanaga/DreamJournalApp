@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 
-
 export default function DreamPicker({ label, items, selectedValue, onValueChange }) {
   return (
     <View>
@@ -20,5 +19,11 @@ export default function DreamPicker({ label, items, selectedValue, onValueChange
 }
 
 const styles = StyleSheet.create({
-  // ...（既存のスタイル）
+  label: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 8,
+    margin: 16,
+  },
 });
+

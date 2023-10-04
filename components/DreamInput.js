@@ -17,5 +17,32 @@ export default function DreamInput({ label, value, onChangeText, multiline = fal
 }
 
 const styles = StyleSheet.create({
-  // ...（既存のスタイル）
+  label: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 8,
+    margin: 16,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 0,
+    marginRight: 16,
+    marginBottom: 16,
+    marginLeft: 16,
+  },
+  textArea: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 10,
+    borderRadius: 5,
+    height: 100,
+    marginTop: 0,
+    marginRight: 16,
+    marginBottom: 16,
+    marginLeft: 16,
+  },
 });
+
