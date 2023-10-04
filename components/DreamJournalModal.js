@@ -33,6 +33,8 @@ export default function DreamJournalModal() {
         JSON.stringify(storedDataArray)
       );
       console.log('Saved:', dreamJournalData);
+
+      setModalVisible(false);
     } catch (error) {
       console.error('Could not save data', error);
     }
