@@ -54,7 +54,6 @@ export default function DreamJournalModal() {
           setModalVisible(!modalVisible);
         }}
       >
-        {/* ここにモーダルの内容を追加 */}
         <Text style={styles.label}>夢のタイトル:</Text>
         <TextInput
           style={styles.input}
@@ -70,6 +69,42 @@ export default function DreamJournalModal() {
           placeholder="詳細を入力"
           multiline
         />
+        <Text style={styles.label}>場所:</Text>
+        <Picker
+          selectedValue={location}
+          onValueChange={(itemValue) => setLocation(itemValue)}
+        >
+          <Picker.Item label="#自宅" value="home" />
+          <Picker.Item label="#学校" value="school" />
+          <Picker.Item label="#仕事場" value="work" />
+          <Picker.Item label="#未知の場所" value="unknown" />
+        </Picker>
+
+        <Text style={styles.label}>登場人物:</Text>
+        <Picker
+          selectedValue={characters}
+          onValueChange={(itemValue) => setCharacters(itemValue)}
+        >
+          <Picker.Item label="#家族" value="family" />
+          <Picker.Item label="#友達" value="friends" />
+          <Picker.Item label="#有名人" value="celebrity" />
+          <Picker.Item label="#自分自身" value="self" />
+        </Picker>
+
+        <Text style={styles.label}>アクション:</Text>
+        <Picker
+          selectedValue={actions}
+          onValueChange={(itemValue) => setActions(itemValue)}
+        >
+          <Picker.Item label="#走る" value="run" />
+          <Picker.Item label="#飛ぶ" value="fly" />
+          <Picker.Item label="#話す" value="talk" />
+          <Picker.Item label="#戦う" value="fight" />
+        </Picker>
+        <Text style={styles.label}>日付:</Text>
+        <TouchableOpacity onPress={openDatePicker}>
+          <Text>{date.toDateString()}</Text>
+        </TouchableOpacity>
         <TagSelector
           selectedTags={selectedTags}
           setSelectedTags={setSelectedTags}
