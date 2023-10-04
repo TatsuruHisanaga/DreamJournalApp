@@ -63,8 +63,8 @@ export default function DreamJournalModal() {
           setModalVisible(!modalVisible);
         }}
       >
-        <DreamInput label="夢のタイトル" value={title} onChangeText={setTitle} />
-        <DreamInput label="夢の詳細" value={details} onChangeText={setDetails} multiline />
+        <DreamInput label="夢のタイトル" value={title} onChangeText={setTitle} placeholder="タイトルを入力しましょう" />
+        <DreamInput label="夢の詳細" value={details} onChangeText={setDetails} multiline placeholder="夢の内容を入力しましょう" />
         <DreamPicker label="場所" items={['#自宅', '#学校', '#仕事場', '#未知の場所']} selectedValue={location} onValueChange={setLocation} />
         <DreamPicker label="登場人物" items={['#家族', '#友達', '#有名人', '#自分自身']} selectedValue={characters} onValueChange={setCharacters} />
         <DreamPicker label="アクション" items={['#走る', '#飛ぶ', '#話す', '#戦う']} selectedValue={actions} onValueChange={setActions} />

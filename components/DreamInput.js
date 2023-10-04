@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 
-export default function DreamInput({ label, value, onChangeText, multiline = false }) {
+export default function DreamInput({ label, value, onChangeText, placeholder, multiline = false }) {
   const [isFocused, setIsFocused] = useState(false);
 
   return (
@@ -11,7 +11,7 @@ export default function DreamInput({ label, value, onChangeText, multiline = fal
         style={isFocused ? styles.focusedInput : (multiline ? styles.textArea : styles.input)}
         value={value}
         onChangeText={onChangeText}
-        placeholder={`${label}を入力`}
+        placeholder={placeholder}
         multiline={multiline}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
