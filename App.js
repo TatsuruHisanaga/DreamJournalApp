@@ -5,6 +5,8 @@ import AlarmCard from './components/AlarmCard';
 import AlarmSettingOverlay from './components/AlarmSettingOverlay';
 import DreamJournalModal from './components/DreamJournalModal';
 import RankingView from './screens/RankingView';
+import { NavigationContainer } from '@react-navigation/native';
+import TabNavigator from './components/TabNavigator';
 
 export default function App() {
   const [alarms, setAlarms] = useState([]);
@@ -54,6 +56,9 @@ export default function App() {
         days={days}
         setDays={setDays}
       />
+      <NavigationContainer>
+        <TabNavigator />
+      </NavigationContainer>
     </View>
   );
 }
