@@ -10,10 +10,19 @@ import {
 } from 'react-native';
 import TagSelector from './TagSelector';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import DreamInput from './DreamInput';
+import DreamPicker from './DreamPicker';
 
 export default function DreamJournalModal() {
   const [title, setTitle] = useState('');
   const [details, setDetails] = useState('');
+  const [location, setLocation] = useState(null);
+  const [characters, setCharacters] = useState(null);
+  const [actions, setActions] = useState(null);
+  const [date, setDate] = useState(new Date());
+  const openDatePicker = () => {
+    setDate(new Date());
+  }
   const [selectedTags, setSelectedTags] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -54,53 +63,11 @@ export default function DreamJournalModal() {
           setModalVisible(!modalVisible);
         }}
       >
-        <Text style={styles.label}>夢のタイトル:</Text>
-        <TextInput
-          style={styles.input}
-          value={title}
-          onChangeText={setTitle}
-          placeholder="タイトルを入力"
-        />
-        <Text style={styles.label}>夢の詳細:</Text>
-        <TextInput
-          style={styles.textArea}
-          value={details}
-          onChangeText={setDetails}
-          placeholder="詳細を入力"
-          multiline
-        />
-        <Text style={styles.label}>場所:</Text>
-        <Picker
-          selectedValue={location}
-          onValueChange={(itemValue) => setLocation(itemValue)}
-        >
-          <Picker.Item label="#自宅" value="home" />
-          <Picker.Item label="#学校" value="school" />
-          <Picker.Item label="#仕事場" value="work" />
-          <Picker.Item label="#未知の場所" value="unknown" />
-        </Picker>
-
-        <Text style={styles.label}>登場人物:</Text>
-        <Picker
-          selectedValue={characters}
-          onValueChange={(itemValue) => setCharacters(itemValue)}
-        >
-          <Picker.Item label="#家族" value="family" />
-          <Picker.Item label="#友達" value="friends" />
-          <Picker.Item label="#有名人" value="celebrity" />
-          <Picker.Item label="#自分自身" value="self" />
-        </Picker>
-
-        <Text style={styles.label}>アクション:</Text>
-        <Picker
-          selectedValue={actions}
-          onValueChange={(itemValue) => setActions(itemValue)}
-        >
-          <Picker.Item label="#走る" value="run" />
-          <Picker.Item label="#飛ぶ" value="fly" />
-          <Picker.Item label="#話す" value="talk" />
-          <Picker.Item label="#戦う" value="fight" />
-        </Picker>
+        <DreamInput label="夢のタイトル:" value={title} onChangeText={setTitle} />
+        <DreamInput label="夢の詳細:" value={details} onChangeText={setDetails} multiline />
+        <DreamPicker label="場所:" items={['#自宅', '#学校', '#仕事場', '#未知の場所']} selectedValue={location} onValueChange={setLocation} />
+        <DreamPicker label="登場人物:" items={['#家族', '#友達', '#有名人', '#自分自身']} selectedValue={characters} onValueChange={setCharacters} />
+        <DreamPicker label="アクション:" items={['#走る', '#飛ぶ', '#話す', '#戦う']} selectedValue={actions} onValueChange={setActions} />
         <Text style={styles.label}>日付:</Text>
         <TouchableOpacity onPress={openDatePicker}>
           <Text>{date.toDateString()}</Text>
