@@ -4,6 +4,8 @@ import { Button } from 'react-native-elements';
 import AlarmCard from './components/AlarmCard';
 import AlarmSettingOverlay from './components/AlarmSettingOverlay';
 import RankingView from './screens/RankingView';
+import { NavigationContainer } from '@react-navigation/native';
+import TabNavigator from './components/TabNavigator';
 
 export default function App() {
   const [alarms, setAlarms] = useState([]);
@@ -52,6 +54,9 @@ export default function App() {
         days={days}
         setDays={setDays}
       />
+      <NavigationContainer>
+        <TabNavigator />
+      </NavigationContainer>
     </View>
   );
 }
