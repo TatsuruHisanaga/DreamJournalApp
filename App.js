@@ -3,8 +3,8 @@ import { View, FlatList } from 'react-native';
 import { Button } from 'react-native-elements';
 import AlarmCard from './components/AlarmCard';
 import AlarmSettingOverlay from './components/AlarmSettingOverlay';
-import RankingView from './RankingView';
 import DreamJournalModal from './components/DreamJournalModal';
+import RankingView from './screens/RankingView';
 
 export default function App() {
   const [alarms, setAlarms] = useState([]);
