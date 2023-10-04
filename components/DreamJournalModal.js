@@ -16,6 +16,13 @@ import DreamPicker from './DreamPicker';
 export default function DreamJournalModal() {
   const [title, setTitle] = useState('');
   const [details, setDetails] = useState('');
+  const [location, setLocation] = useState(null);
+  const [characters, setCharacters] = useState(null);
+  const [actions, setActions] = useState(null);
+  const [date, setDate] = useState(new Date());
+  const openDatePicker = () => {
+    setDate(new Date());
+  }
   const [selectedTags, setSelectedTags] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
 
