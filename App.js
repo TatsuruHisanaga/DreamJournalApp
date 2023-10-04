@@ -3,6 +3,7 @@ import { View, FlatList } from 'react-native';
 import { Button } from 'react-native-elements';
 import AlarmCard from './components/AlarmCard';
 import AlarmSettingOverlay from './components/AlarmSettingOverlay';
+import DreamJournalModal from './components/DreamJournalModal';
 import RankingView from './screens/RankingView';
 import { NavigationContainer } from '@react-navigation/native';
 import TabNavigator from './components/TabNavigator';
@@ -37,6 +38,7 @@ export default function App() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <RankingView />
+      <DreamJournalModal />
       <FlatList
         data={alarms}
         keyExtractor={(item, index) => index.toString()}
