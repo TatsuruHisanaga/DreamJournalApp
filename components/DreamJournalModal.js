@@ -10,6 +10,8 @@ import {
 } from 'react-native';
 import TagSelector from './TagSelector';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import DreamInput from './DreamInput';
+import DreamPicker from './DreamPicker';
 
 export default function DreamJournalModal() {
   const [title, setTitle] = useState('');

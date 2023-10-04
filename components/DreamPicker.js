@@ -1,5 +1,7 @@
 import React from 'react';
-import { View, Text, Picker, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
+
 
 export default function DreamPicker({ label, items, selectedValue, onValueChange }) {
   return (
