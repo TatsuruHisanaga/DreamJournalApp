@@ -12,6 +12,7 @@ import TagSelector from './TagSelector';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DreamInput from './DreamInput';
 import DreamPicker from './DreamPicker';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 export default function DreamJournalModal() {
   const [title, setTitle] = useState('');
@@ -20,9 +21,15 @@ export default function DreamJournalModal() {
   const [characters, setCharacters] = useState(null);
   const [actions, setActions] = useState(null);
   const [date, setDate] = useState(new Date());
-  const openDatePicker = () => {
-    setDate(new Date());
+
+  const [showDatePicker, setShowDatePicker] = useState(false);
+
+  const onChangeDate = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShowDatePicker(false);
+    setDate(currentDate);
   };
+
   const [selectedTags, setSelectedTags] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -98,9 +105,17 @@ export default function DreamJournalModal() {
                 onValueChange={setActions}
               />
               <Text style={styles.label}>日付:</Text>
-              <TouchableOpacity onPress={openDatePicker}>
+              <TouchableOpacity onPress={() => setShowDatePicker(true)}>
                 <Text>{date.toDateString()}</Text>
               </TouchableOpacity>
+              {showDatePicker && (
+                <DateTimePicker
+                  value={date}
+                  mode="date"
+                  display="default"
+                  onChange={onChangeDate}
+                />
+              )}
               <TagSelector
                 selectedTags={selectedTags}
                 setSelectedTags={setSelectedTags}
