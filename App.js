@@ -46,6 +46,7 @@ export default function App() {
         renderItem={({ item }) => (
           <AlarmCard time={item.time} days={item.days} />
         )}
+      />
       <DreamJournalCard
         entry={{
           name: 'テストユーザー',
