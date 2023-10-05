@@ -5,6 +5,10 @@ const tags = [
   { label: '#喜び', value: 'joy' },
   { label: '#怒り', value: 'anger' },
   { label: '#驚き', value: 'surprise' },
+  { label: '#悲しみ', value: 'sadness' },
+  { label: '#恐怖', value: 'fear' },
+  { label: '#期待', value: 'anticipation' },
+  { label: '#嫌悪', value: 'disgust' },
   // 他のタグもここに追加
 ];
 
@@ -19,7 +23,7 @@ export default function TagSelector({ selectedTags, setSelectedTags }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>タグ:</Text>
+      <Text style={styles.label}>タグ</Text>
       <View style={styles.tagContainer}>
         {tags.map((tag, index) => (
           <TouchableOpacity
