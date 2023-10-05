@@ -12,19 +12,32 @@ import TagSelector from './TagSelector';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DreamInput from './DreamInput';
 import DreamPicker from './DreamPicker';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 export default function DreamJournalModal() {
   const [title, setTitle] = useState('');
   const [details, setDetails] = useState('');
   const [location, setLocation] = useState(null);
   const [characters, setCharacters] = useState(null);
+    const [selectedTags, setSelectedTags] = useState([]);
+    const [modalVisible, setModalVisible] = useState(false);
   const [actions, setActions] = useState(null);
   const [date, setDate] = useState(new Date());
-  const openDatePicker = () => {
-    setDate(new Date());
+
+  const [showDatePicker, setShowDatePicker] = useState(false);
+
+  const onChangeDate = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShowDatePicker(false);
+    setDate(currentDate);
   };
-  const [selectedTags, setSelectedTags] = useState([]);
-  const [modalVisible, setModalVisible] = useState(false);
+
+  const formatDateToJapanese = (date) => {
+    const month = date.getMonth() + 1; // 月は0から始まるため、+1が必要
+    const day = date.getDate();
+    const weekDay = ["日", "月", "火", "水", "木", "金", "土"][date.getDay()]; // 曜日を日本語で取得
+    return `${month}月${day}日（${weekDay}）`;
+  };
 
   const handleSave = async () => {
     try {
@@ -97,10 +110,18 @@ export default function DreamJournalModal() {
                 selectedValue={actions}
                 onValueChange={setActions}
               />
-              <Text style={styles.label}>日付:</Text>
-              <TouchableOpacity onPress={openDatePicker}>
-                <Text>{date.toDateString()}</Text>
+              <Text style={styles.label}>日付</Text>
+              <TouchableOpacity onPress={() => setShowDatePicker(true)} >
+                <Text styles={styles.date} >{formatDateToJapanese(date)}</Text>
               </TouchableOpacity>
+              {showDatePicker && (
+                <DateTimePicker
+                  value={date}
+                  mode="date"
+                  display="default"
+                  onChange={onChangeDate}
+                />
+              )}
               <TagSelector
                 selectedTags={selectedTags}
                 setSelectedTags={setSelectedTags}
@@ -169,5 +190,9 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 4,
+  },
+  date: {
+    fontSize: 18,
+    marginLeft: 32,
   },
 });
