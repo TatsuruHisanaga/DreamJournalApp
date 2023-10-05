@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
+import { View, Text, FlatList, StyleSheet, Image } from 'react-native';
 
 const RankingList = ({ data, userData }) => {
 
@@ -32,7 +32,7 @@ const RankingList = ({ data, userData }) => {
       renderItem={({ item, index }) => (
         <View style={[styles.listItem, switchBgColor(item.id), rankStyle(index)]}>
           <Text style={styles.rank}>{index + 1}</Text>
-          {/* アバター画像を追加したい */}
+          <Image source={item.avatarURL ? { uri: item.avatarURL } : require('../assets/default_avatar.png')} style={styles.avatar} />
           <Text style={styles.name}>{item.name}</Text>
           <Text style={styles.score}>{item.time}s</Text>
         </View>
@@ -72,6 +72,12 @@ const styles = StyleSheet.create({
   },
   thirdPlace: {
     backgroundColor: '#cd7f32', // bronze color
+  },
+  avatar: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    marginRight: 20, // 右側の余白を追加してテキストとの間にスペースを作る
   },
 });
 
