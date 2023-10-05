@@ -3,10 +3,10 @@ import {
   Modal,
   View,
   Text,
-  TextInput,
   StyleSheet,
   Button,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 import TagSelector from './TagSelector';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -63,21 +63,23 @@ export default function DreamJournalModal() {
           setModalVisible(!modalVisible);
         }}
       >
-        <DreamInput label="夢のタイトル:" value={title} onChangeText={setTitle} />
-        <DreamInput label="夢の詳細:" value={details} onChangeText={setDetails} multiline />
-        <DreamPicker label="場所:" items={['#自宅', '#学校', '#仕事場', '#未知の場所']} selectedValue={location} onValueChange={setLocation} />
-        <DreamPicker label="登場人物:" items={['#家族', '#友達', '#有名人', '#自分自身']} selectedValue={characters} onValueChange={setCharacters} />
-        <DreamPicker label="アクション:" items={['#走る', '#飛ぶ', '#話す', '#戦う']} selectedValue={actions} onValueChange={setActions} />
-        <Text style={styles.label}>日付:</Text>
-        <TouchableOpacity onPress={openDatePicker}>
-          <Text>{date.toDateString()}</Text>
-        </TouchableOpacity>
-        <TagSelector
-          selectedTags={selectedTags}
-          setSelectedTags={setSelectedTags}
-        />
-        <Button title="記録する" onPress={handleSave} />
-        <Button title="閉じる" onPress={() => setModalVisible(false)} />
+        <ScrollView>
+          <DreamInput label="夢のタイトル:" value={title} onChangeText={setTitle} />
+          <DreamInput label="夢の詳細:" value={details} onChangeText={setDetails} multiline />
+          <DreamPicker label="場所:" items={['#自宅', '#学校', '#仕事場', '#未知の場所']} selectedValue={location} onValueChange={setLocation} />
+          <DreamPicker label="登場人物:" items={['#家族', '#友達', '#有名人', '#自分自身']} selectedValue={characters} onValueChange={setCharacters} />
+          <DreamPicker label="アクション:" items={['#走る', '#飛ぶ', '#話す', '#戦う']} selectedValue={actions} onValueChange={setActions} />
+          <Text style={styles.label}>日付:</Text>
+          <TouchableOpacity onPress={openDatePicker}>
+            <Text>{date.toDateString()}</Text>
+          </TouchableOpacity>
+          <TagSelector
+            selectedTags={selectedTags}
+            setSelectedTags={setSelectedTags}
+          />
+          <Button title="記録する" onPress={handleSave} />
+          <Button title="閉じる" onPress={() => setModalVisible(false)} />
+        </ScrollView>
       </Modal>
     </View>
   );
