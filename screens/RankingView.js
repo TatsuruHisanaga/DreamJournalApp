@@ -18,7 +18,7 @@ const RankingView = () => {
   ];
 
   const userData = {
-    id: 11, name: 'USER', time: 19,
+    id: 11, name: 'あなた', time: 19,
   }
 
   const makeUserRanking = (userData, rankingData) => {
