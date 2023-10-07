@@ -11,7 +11,7 @@ const Tab = createMaterialBottomTabNavigator();
 
 function TabNavigator() {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator initialRouteName="ホーム">
       <Tab.Screen
         name="ランキング"
         component={RankingView}
