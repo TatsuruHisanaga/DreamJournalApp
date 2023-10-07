@@ -64,6 +64,11 @@ export default function AlarmSettingOverlay({
 
   const notificationListener = useRef();
 
+  const handleNotification = () => {
+    addAlarm();
+    scheduleNotification(time);
+  };
+
   return (
     <Overlay
       overlayStyle={styles.container}
@@ -81,7 +86,7 @@ export default function AlarmSettingOverlay({
             onPress={() => setDays({ ...days, [day]: !days[day] })}
           />
         ))}
-        <Button title="設定" onPress={addAlarm} />
+        <Button title="設定" onPress={handleNotification} />
       </View>
     </Overlay>
   );
