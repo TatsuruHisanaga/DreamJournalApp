@@ -2,12 +2,20 @@ import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 
 export default function DreamJournalCard({ entry }) {
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = date.getMonth() + 1; // 月は0から始まるため、+1が必要
+    const dayOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][date.getDay()];
+    return `${dayOfWeek} ${month}/${day}`;
+  }
+  
   return (
     <View style={styles.card}>
       <View style={styles.header}>
         {/* <Image source={{ uri: entry.profileImage }} style={styles.profileImage} /> */}
-        <Text style={styles.name}>{entry.name}</Text>
-        <Text style={styles.date}>{entry.date}</Text>
+        <Text style={styles.date}>{formatDate(entry.date)}</Text>
+        <Text style={styles.name}>{/* {entry.name} */}</Text>
       </View>
       {/* <Image source={{ uri: entry.image }} style={styles.dreamImage} /> */}
       <Text style={styles.title}>{entry.title}</Text>
