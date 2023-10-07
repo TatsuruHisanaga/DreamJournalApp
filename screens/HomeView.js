@@ -5,6 +5,7 @@ import AlarmCard from '../components/AlarmCard';
 import AlarmSettingOverlay from '../components/AlarmSettingOverlay';
 import RankingView from './RankingView';
 import DreamJournalCard from '../components/DreamJournalCard';
+import RingingAlarm from '../components/RingingAlarm';
 
 export default function HomeView() {
   const [alarms, setAlarms] = useState([]);
@@ -19,6 +20,7 @@ export default function HomeView() {
     Sat: false,
     Sun: false,
   });
+  const [isAlarmRinging, setIsAlarmRinging] = useState(false); //trueの時にカウントアップが始まる
 
   const toggleOverlay = () => {
     setVisible(!visible);
@@ -64,6 +66,10 @@ export default function HomeView() {
         onTimeChange={onTimeChange}
         days={days}
         setDays={setDays}
+      />
+      <RingingAlarm
+        isAlarmRinging={isAlarmRinging}
+        setIsAlarmRinging={setIsAlarmRinging}
       />
     </View>
   );
