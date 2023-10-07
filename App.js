@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { View, FlatList } from 'react-native';
 import { Button } from 'react-native-elements';
 import AlarmCard from './components/AlarmCard';
@@ -6,6 +6,14 @@ import AlarmSettingOverlay from './components/AlarmSettingOverlay';
 import RankingView from './RankingView';
 import * as Notifications from 'expo-notifications';
 Notifications.requestPermissionsAsync();
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: false,
+  }),
+});
 
 export default function App() {
   const [alarms, setAlarms] = useState([]);
@@ -56,6 +64,20 @@ export default function App() {
   const onTimeChange = (e, selectedTime) => {
     setTime(selectedTime || time);
   };
+
+  const notificationListener = useRef();
+
+  useEffect(() => {
+
+    notificationListener.current = Notifications.addNotificationReceivedListener(() => {
+      console.log('Notification received');
+      // 通知を受け取った時の処理ここに追加できる
+      alert('通知を受け取りました！');
+    });
+
+    return () => {
+    };
+  }, []);
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
