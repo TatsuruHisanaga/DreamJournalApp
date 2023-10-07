@@ -32,7 +32,7 @@ const RankingView = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Ranking</Text>
+      <Text style={styles.title}>早起きランキング</Text>
       <RankingList data={newRankingData} userData={userData} />
     </View>
   );
@@ -40,8 +40,8 @@ const RankingView = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    width: '90%',
+    marginHorizontal: 16,
+    height: '90%',
   },
   title: {
     fontSize: 24,

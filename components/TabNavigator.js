@@ -1,26 +1,18 @@
-import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-// import DreamJournalModal from './DreamJournalModal';
-import AnotherScreen from './AnotherScreen'; // 仮のスクリーン
+import RankingView from '../screens/RankingView';
+import DreamJournalScreen from '../screens/DreamJournalScreen';
+import HomeView from '../screens/HomeView';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
-const Tab = createBottomTabNavigator();
+const Tab = createMaterialBottomTabNavigator();
 
-const TabNavigator = () => {
+function TabNavigator() {
   return (
-    <Tab.Navigator
-      screenOptions={{
-        tabBarActiveTintColor: '#6200ee',
-        tabBarInactiveTintColor: '#828282',
-        tabBarStyle: {
-          backgroundColor: '#ffffff',
-          borderTopColor: '#d1d1d1',
-        },
-      }}
-    >
-      {/* <Tab.Screen name="DreamJournal" component={DreamJournalModal} /> */}
-      <Tab.Screen name="Another" component={AnotherScreen} />
+    <Tab.Navigator>
+      <Tab.Screen name="Home" component={HomeView} />
+      <Tab.Screen name="DreamJournal" component={DreamJournalScreen} />
+      <Tab.Screen name="Ranking" component={RankingView} />
     </Tab.Navigator>
   );
-};
+}
 
 export default TabNavigator;
