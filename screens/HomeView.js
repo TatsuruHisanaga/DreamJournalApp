@@ -3,7 +3,6 @@ import { View, FlatList } from 'react-native';
 import { Button } from 'react-native-elements';
 import AlarmCard from '../components/AlarmCard';
 import AlarmSettingOverlay from '../components/AlarmSettingOverlay';
-import DreamJournalModal from '../components/DreamJournalModal';
 import RankingView from './RankingView';
 import DreamJournalCard from '../components/DreamJournalCard';
 
@@ -52,7 +51,6 @@ export default function HomeView() {
           details: 'テストの夢の詳細',
         }}
       />
-      <DreamJournalModal />
       <Button
         title="アラーム設定"
         onPress={toggleOverlay}
