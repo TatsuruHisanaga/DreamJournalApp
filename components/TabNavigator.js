@@ -4,6 +4,8 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import HomeView from '../screens/HomeView';
 import DreamJournalScreen from '../screens/DreamJournalScreen';
 import RankingView from '../screens/RankingView';
+import AlarmScreen from '../screens/AlarmScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -11,7 +13,25 @@ function TabNavigator() {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name="Home"
+        name="ランキング"
+        component={RankingView}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="star" color={color} size={24} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="アラーム"
+        component={AlarmScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="alarm" color={color} size={24} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="ホーム"
         component={HomeView}
         options={{
           tabBarIcon: ({ color, size }) => (
@@ -20,7 +40,7 @@ function TabNavigator() {
         }}
       />
       <Tab.Screen
-        name="DreamJournal"
+        name="夢日記"
         component={DreamJournalScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
@@ -29,11 +49,11 @@ function TabNavigator() {
         }}
       />
       <Tab.Screen
-        name="Ranking"
-        component={RankingView}
+        name="プロフィール"
+        component={ProfileScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="star" color={color} size={24} />
+            <MaterialCommunityIcons name="account" color={color} size={24} />
           ),
         }}
       />

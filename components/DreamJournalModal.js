@@ -1,3 +1,4 @@
+// DreamJournalModal.js
 import React, { useState } from 'react';
 import {
   Modal,
@@ -13,14 +14,16 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import DreamInput from './DreamInput';
 import DreamPicker from './DreamPicker';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'; // アイコンのインポート
+
 
 export default function DreamJournalModal() {
   const [title, setTitle] = useState('');
   const [details, setDetails] = useState('');
   const [location, setLocation] = useState(null);
   const [characters, setCharacters] = useState(null);
-    const [selectedTags, setSelectedTags] = useState([]);
-    const [modalVisible, setModalVisible] = useState(false);
+  const [selectedTags, setSelectedTags] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
   const [actions, setActions] = useState(null);
   const [date, setDate] = useState(new Date());
 
@@ -35,7 +38,7 @@ export default function DreamJournalModal() {
   const formatDateToJapanese = (date) => {
     const month = date.getMonth() + 1; // 月は0から始まるため、+1が必要
     const day = date.getDate();
-    const weekDay = ["日", "月", "火", "水", "木", "金", "土"][date.getDay()]; // 曜日を日本語で取得
+    const weekDay = ['日', '月', '火', '水', '木', '金', '土'][date.getDay()]; // 曜日を日本語で取得
     return `${month}月${day}日（${weekDay}）`;
   };
 
@@ -80,39 +83,39 @@ export default function DreamJournalModal() {
           <View style={styles.modalView}>
             <ScrollView>
               <DreamInput
-                label="夢のタイトル"
+                label="Title"
                 value={title}
                 onChangeText={setTitle}
-                placeholder="タイトルを入力しましょう"
+                placeholder="夢のタイトルを入力しましょう"
               />
               <DreamInput
-                label="夢の詳細"
+                label="Details"
                 value={details}
                 onChangeText={setDetails}
                 multiline
                 placeholder="夢の内容を入力しましょう"
               />
-              <DreamPicker
+              {/* <DreamPicker
                 label="場所"
-                items={['#自宅', '#学校', '#仕事場', '#未知の場所']}
+                items={['自宅', '学校', '仕事場', '未知の場所']}
                 selectedValue={location}
                 onValueChange={setLocation}
               />
               <DreamPicker
                 label="登場人物"
-                items={['#家族', '#友達', '#有名人', '#自分自身']}
+                items={['家族', '友達', '有名人', '自分自身']}
                 selectedValue={characters}
                 onValueChange={setCharacters}
               />
               <DreamPicker
                 label="アクション"
-                items={['#走る', '#飛ぶ', '#話す', '#戦う']}
+                items={['走る', '飛ぶ', '話す', '戦う']}
                 selectedValue={actions}
                 onValueChange={setActions}
-              />
-              <Text style={styles.label}>日付</Text>
-              <TouchableOpacity onPress={() => setShowDatePicker(true)} >
-                <Text styles={styles.date} >{formatDateToJapanese(date)}</Text>
+              /> */}
+              <Text style={styles.label}>Date</Text>
+              <TouchableOpacity onPress={() => setShowDatePicker(true)}>
+                <Text styles={styles.date}>{formatDateToJapanese(date)}</Text>
               </TouchableOpacity>
               {showDatePicker && (
                 <DateTimePicker
@@ -126,8 +129,10 @@ export default function DreamJournalModal() {
                 selectedTags={selectedTags}
                 setSelectedTags={setSelectedTags}
               />
-              <Button title="記録する" onPress={handleSave} />
-              <Button title="閉じる" onPress={() => setModalVisible(false)} />
+              <View style={styles.button} >
+                <Button title="記録する" onPress={handleSave} />
+                <Button title="閉じる" onPress={() => setModalVisible(false)} />
+              </View>
             </ScrollView>
           </View>
         </View>
@@ -151,7 +156,7 @@ const styles = StyleSheet.create({
   input: {
     borderWidth: 1,
     borderColor: '#ccc',
-    padding: 10,
+    padding: 16,
     borderRadius: 5,
     marginTop: 0,
     marginRight: 16,
@@ -177,11 +182,11 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.2)', // 半透明の背景
   },
   modalView: {
-    width: '80%',
+    width: '85%',
     height: '80%',
     backgroundColor: 'white',
     borderRadius: 10,
-    padding: 20,
+    padding: 16,
     elevation: 5, // Androidの影
     shadowColor: '#000', // iOSの影
     shadowOffset: {
@@ -194,5 +199,8 @@ const styles = StyleSheet.create({
   date: {
     fontSize: 18,
     marginLeft: 32,
+  },
+  button: {
+    
   },
 });
