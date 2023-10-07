@@ -1,5 +1,5 @@
 // DreamJournalModal.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Modal,
   View,
@@ -16,8 +16,7 @@ import DreamPicker from './DreamPicker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'; // アイコンのインポート
 
-
-export default function DreamJournalModal() {
+export default function DreamJournalModal(props) {
   const [title, setTitle] = useState('');
   const [details, setDetails] = useState('');
   const [location, setLocation] = useState(null);
@@ -26,8 +25,9 @@ export default function DreamJournalModal() {
   const [modalVisible, setModalVisible] = useState(false);
   const [actions, setActions] = useState(null);
   const [date, setDate] = useState(new Date());
-
+  const [dreamJournalEntries, setDreamJournalEntries] = useState([]);
   const [showDatePicker, setShowDatePicker] = useState(false);
+  const [isInputValid, setIsInputValid] = useState(false);
 
   const onChangeDate = (event, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -42,7 +42,7 @@ export default function DreamJournalModal() {
     return `${month}月${day}日（${weekDay}）`;
   };
 
-  const handleSave = async () => {
+  const internalHandleSave = async () => {
     try {
       const dreamJournalData = { title, details, selectedTags };
       const storedData = await AsyncStorage.getItem('dreamJournal');
@@ -53,17 +53,52 @@ export default function DreamJournalModal() {
       }
 
       storedDataArray.push(dreamJournalData);
-      await AsyncStorage.setItem(
-        'dreamJournal',
-        JSON.stringify(storedDataArray)
-      );
-      console.log('Saved:', dreamJournalData);
-
       setModalVisible(false);
     } catch (error) {
       console.error('Could not save data', error);
     }
   };
+
+  const handleSaveButton = async () => {
+    const entry = {
+      title: title,
+      details: details,
+      date: date,
+      selectedTags: selectedTags,
+    };
+    await props.handleSave(entry);
+    setModalVisible(false);
+  };
+
+  // AsyncStorageからデータを取得
+  const fetchDreamJournalData = async () => {
+    try {
+      const storedData = await AsyncStorage.getItem('dreamJournal');
+      if (storedData) {
+        setDreamJournalEntries(JSON.parse(storedData));
+      }
+    } catch (error) {
+      console.error('Could not fetch data', error);
+    }
+  };
+
+  // コンポーネントがマウントされたときにデータを取得
+  useEffect(() => {
+    fetchDreamJournalData();
+  }, []);
+
+  const validateInput = () => {
+    if (title && details && date) {
+      setIsInputValid(true);
+    } else {
+      setIsInputValid(false);
+    }
+  };
+
+  // title, details, dateが変更されたときに入力の検証を行う
+  useEffect(() => {
+    validateInput();
+  }, [title, details, date]);
 
   return (
     <View style={styles.container}>
@@ -129,8 +164,12 @@ export default function DreamJournalModal() {
                 selectedTags={selectedTags}
                 setSelectedTags={setSelectedTags}
               />
-              <View style={styles.button} >
-                <Button title="記録する" onPress={handleSave} />
+              <View>
+                <Button
+                  title="記録する"
+                  onPress={handleSaveButton}
+                  disabled={!isInputValid}
+                />
                 <Button title="閉じる" onPress={() => setModalVisible(false)} />
               </View>
             </ScrollView>
@@ -199,8 +238,5 @@ const styles = StyleSheet.create({
   date: {
     fontSize: 18,
     marginLeft: 32,
-  },
-  button: {
-    
   },
 });

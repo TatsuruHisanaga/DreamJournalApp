@@ -1,7 +1,9 @@
+// DreamJournalScreen.js
 import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, ScrollView, StyleSheet } from 'react-native';
 import DreamJournalCard from '../components//DreamJournalCard';
 import DreamJournalModal from '../components/DreamJournalModal';
+import DreamJournalContainer from '../components/DreamJournalContainer';
 
 export default function DreamJournalScreen() {
   const [modalVisible, setModalVisible] = useState(false);
@@ -15,8 +17,11 @@ export default function DreamJournalScreen() {
 
   return (
     <View style={styles.container}>
-      <DreamJournalCard entry={sampleEntry} />
-      <DreamJournalModal modalVisible={modalVisible} setModalVisible={setModalVisible} /> 
+      {/* <DreamJournalCard entry={sampleEntry} />
+      <DreamJournalModal modalVisible={modalVisible} setModalVisible={setModalVisible} />  */}
+      <ScrollView contentContainerStyle={styles.container}>
+        <DreamJournalContainer />
+      </ScrollView>
     </View>
   );
 }
