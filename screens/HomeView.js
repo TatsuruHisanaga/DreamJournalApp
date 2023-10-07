@@ -21,7 +21,7 @@ export default function HomeView() {
     Sat: false,
     Sun: false,
   });
-  const [isAlarmRinging, setIsAlarmRinging] = useState(true);
+  const [isAlarmRinging, setIsAlarmRinging] = useState(false); //trueの時にカウントアップが始まる
 
   const toggleOverlay = () => {
     setVisible(!visible);

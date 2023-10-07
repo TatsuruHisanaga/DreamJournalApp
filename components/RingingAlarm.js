@@ -5,7 +5,7 @@ import { Stopwatch } from "react-native-stopwatch-timer";
 
 export default function RingingAlarm({ isAlarmRinging, setIsAlarmRinging }) {
   return (
-    <Overlay isVisible={isAlarmRinging} onBackdropPress={isAlarmRinging}>
+    <Overlay isVisible={isAlarmRinging}>
       <View>
         <Text>Beep! Beep!</Text>
         <Stopwatch lap msecs start={isAlarmRinging} options={options} />
