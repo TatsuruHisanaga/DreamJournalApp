@@ -68,7 +68,6 @@ export default function App() {
   const notificationListener = useRef();
 
   useEffect(() => {
-
     notificationListener.current = Notifications.addNotificationReceivedListener(() => {
       console.log('Notification received');
       // 通知を受け取った時の処理ここに追加できる
@@ -76,6 +75,9 @@ export default function App() {
     });
 
     return () => {
+      if (notificationListener.current) {
+        Notifications.removeNotificationSubscription(notificationListener.current);
+      }
     };
   }, []);
 
