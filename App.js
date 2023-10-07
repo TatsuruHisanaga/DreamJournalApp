@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import TabNavigator from './components/TabNavigator';
 
@@ -22,6 +22,7 @@ export default function App() {
 
   const addAlarm = () => {
     setAlarms([...alarms, { time, days }]);
+    scheduleNotification(time);
     toggleOverlay();
   };
 
