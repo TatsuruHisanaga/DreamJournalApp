@@ -6,6 +6,7 @@ import AlarmSettingOverlay from '../components/AlarmSettingOverlay';
 import DreamJournalModal from '../components/DreamJournalModal';
 import RankingView from './RankingView';
 import DreamJournalCard from '../components/DreamJournalCard';
+import RingingAlarm from '../components/RingingAlarm';
 
 export default function HomeView() {
   const [alarms, setAlarms] = useState([]);
@@ -20,6 +21,7 @@ export default function HomeView() {
     Sat: false,
     Sun: false,
   });
+  const [isAlarmRinging, setIsAlarmRinging] = useState(true);
 
   const toggleOverlay = () => {
     setVisible(!visible);
@@ -66,6 +68,10 @@ export default function HomeView() {
         onTimeChange={onTimeChange}
         days={days}
         setDays={setDays}
+      />
+      <RingingAlarm
+        isAlarmRinging={isAlarmRinging}
+        setIsAlarmRinging={setIsAlarmRinging}
       />
     </View>
   );
