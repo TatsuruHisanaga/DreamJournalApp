@@ -25,8 +25,9 @@ export default function DreamJournalModal(props) {
   const [modalVisible, setModalVisible] = useState(false);
   const [actions, setActions] = useState(null);
   const [date, setDate] = useState(new Date());
-  const [dreamJournalEntries, setDreamJournalEntries] = useState([]); // 新しいステート変数
+  const [dreamJournalEntries, setDreamJournalEntries] = useState([]);
   const [showDatePicker, setShowDatePicker] = useState(false);
+  const [isInputValid, setIsInputValid] = useState(false);
 
   const onChangeDate = (event, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -46,11 +47,11 @@ export default function DreamJournalModal(props) {
       const dreamJournalData = { title, details, selectedTags };
       const storedData = await AsyncStorage.getItem('dreamJournal');
       let storedDataArray = [];
-    
+
       if (storedData) {
         storedDataArray = JSON.parse(storedData);
       }
-    
+
       storedDataArray.push(dreamJournalData);
       setModalVisible(false);
     } catch (error) {
@@ -85,6 +86,19 @@ export default function DreamJournalModal(props) {
   useEffect(() => {
     fetchDreamJournalData();
   }, []);
+
+  const validateInput = () => {
+    if (title && details && date) {
+      setIsInputValid(true);
+    } else {
+      setIsInputValid(false);
+    }
+  };
+
+  // title, details, dateが変更されたときに入力の検証を行う
+  useEffect(() => {
+    validateInput();
+  }, [title, details, date]);
 
   return (
     <View style={styles.container}>
@@ -151,7 +165,11 @@ export default function DreamJournalModal(props) {
                 setSelectedTags={setSelectedTags}
               />
               <View>
-                <Button title="記録する" onPress={handleSaveButton} />
+                <Button
+                  title="記録する"
+                  onPress={handleSaveButton}
+                  disabled={!isInputValid}
+                />
                 <Button title="閉じる" onPress={() => setModalVisible(false)} />
               </View>
             </ScrollView>
