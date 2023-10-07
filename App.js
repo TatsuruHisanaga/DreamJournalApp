@@ -1,11 +1,6 @@
 import React, { useState } from 'react';
-import AlarmCard from './components/AlarmCard';
-import AlarmSettingOverlay from './components/AlarmSettingOverlay';
-import DreamJournalModal from './components/DreamJournalModal';
-import RankingView from './screens/RankingView';
 import { NavigationContainer } from '@react-navigation/native';
 import TabNavigator from './components/TabNavigator';
-import DreamJournalCard from './components/DreamJournalCard';
 
 export default function App() {
   const [alarms, setAlarms] = useState([]);
