@@ -12,6 +12,12 @@ const tags = [
     color: '#FFF4CC',
   },
   {
+    label: '幸せ',
+    value: 'happy',
+    icon: 'emoticon-outline',
+    color: '#E0F2FE',
+  },
+  {
     label: '怒り',
     value: 'anger',
     icon: 'emoticon-angry-outline',
@@ -66,18 +72,42 @@ export default function DreamJournalCard({ entry }) {
     return tag ? { icon: tag.icon, label: tag.label, color: tag.color } : null;
   };
 
+  let ratingBarColor;
+  if (entry.wakeUpRating >= 4) {
+    ratingBarColor = 'limegreen'; 
+  } else if (entry.wakeUpRating === 3) {
+    ratingBarColor = 'orange'; 
+  } else {
+    ratingBarColor = 'red'; 
+  }
+
+  const defaultImageUri = 'https://images.unsplash.com/photo-1496337589254-7e19d01cec44?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2670&q=80';
+
   return (
     <Surface style={styles.card} elevation={1}>
-      {entry.dreamImage && (
-        <View style={styles.imageWrapper}>
-          <Image source={{ uri: entry.dreamImage }} style={styles.dreamImage} />
-        </View>
-      )}
+    <View style={styles.imageWrapper}>
+      <Image source={{ uri: entry.dreamImage || defaultImageUri }} style={styles.dreamImage} />
+    </View>
       <View style={styles.header}>
         <Text style={styles.date}>{formatDate(entry.date)}</Text>
         <Text style={styles.name}>{/* {entry.name} */}</Text>
       </View>
       <Text style={styles.title}>{entry.title}</Text>
+      {entry.wakeUpRating && (
+        <View style={styles.ratingBarContainer}>
+          {[1, 2, 3, 4, 5].map((i) => (
+            <View
+              key={i}
+              style={[
+                styles.ratingDot,
+                {
+                  backgroundColor: i <= entry.wakeUpRating ? ratingBarColor : '#ccc',
+                },
+              ]}
+            />
+          ))}
+        </View>
+      )}
       <Text style={styles.details}>{entry.details}</Text>
       <View style={styles.tagsContainer}>
         {entry.selectedTags &&
@@ -148,5 +178,17 @@ const styles = StyleSheet.create({
   tagLabel: {
     fontSize: 12,
     marginLeft: 4,
+  },
+  ratingBarContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginVertical: 4,
+    width: 50,
+  },
+  ratingDot: {
+    width: 6, // 点の大きさ
+    height: 6, // 点の大きさ
+    borderRadius: 3, // 半径を設定して丸くする
   },
 });

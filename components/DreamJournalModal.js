@@ -15,6 +15,7 @@ import DreamInput from './DreamInput';
 import DreamPicker from './DreamPicker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Icon } from 'react-native-elements';
+import Slider from '@react-native-community/slider';
 
 export default function DreamJournalModal(props) {
   const [title, setTitle] = useState('');
@@ -65,10 +66,13 @@ export default function DreamJournalModal(props) {
       details: details,
       date: date,
       selectedTags: selectedTags,
+      wakeUpRating: wakeUpRating,
     };
     await props.handleSave(entry);
     setModalVisible(false);
   };
+
+  const [wakeUpRating, setWakeUpRating] = useState(3);
 
   // AsyncStorageからデータを取得
   const fetchDreamJournalData = async () => {
@@ -113,18 +117,39 @@ export default function DreamJournalModal(props) {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <ScrollView>
+              <Text style={styles.label}>Date</Text>
+              <TouchableOpacity onPress={() => setShowDatePicker(true)}>
+                <Text styles={styles.date}>{formatDateToJapanese(date)}</Text>
+              </TouchableOpacity>
+              {showDatePicker && (
+                <DateTimePicker
+                  value={date}
+                  mode="date"
+                  display="default"
+                  onChange={onChangeDate}
+                />
+              )}
               <DreamInput
-                label="Title"
+                label="タイトル"
                 value={title}
                 onChangeText={setTitle}
                 placeholder="夢のタイトルを入力しましょう"
               />
               <DreamInput
-                label="Details"
+                label="詳細"
                 value={details}
                 onChangeText={setDetails}
                 multiline
                 placeholder="夢の内容を入力しましょう"
+              />
+              <Text style={styles.label}>寝起きの良さ</Text>
+              <Slider
+                style={{ width: '100%', height: 40, alignItems: 'center' }}
+                minimumValue={1}
+                maximumValue={5}
+                step={1}
+                value={wakeUpRating}
+                onValueChange={(value) => setWakeUpRating(value)}
               />
               {/* <DreamPicker
                 label="場所"
@@ -144,18 +169,6 @@ export default function DreamJournalModal(props) {
                 selectedValue={actions}
                 onValueChange={setActions}
               /> */}
-              <Text style={styles.label}>Date</Text>
-              <TouchableOpacity onPress={() => setShowDatePicker(true)}>
-                <Text styles={styles.date}>{formatDateToJapanese(date)}</Text>
-              </TouchableOpacity>
-              {showDatePicker && (
-                <DateTimePicker
-                  value={date}
-                  mode="date"
-                  display="default"
-                  onChange={onChangeDate}
-                />
-              )}
               <TagSelector
                 selectedTags={selectedTags}
                 setSelectedTags={setSelectedTags}
@@ -253,7 +266,6 @@ const styles = StyleSheet.create({
   fixedButton: {
     position: 'absolute',
     bottom: -12,
-
   },
   // button: {
   //   margin: 16,
