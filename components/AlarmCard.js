@@ -57,6 +57,8 @@ const styles = StyleSheet.create({
   },
   dayText: {
     color: "#fff",
+    fontSize: 15,
+    fontFamily: "bold",
   },
   switchContainer: {
     marginTop: 10,
@@ -66,6 +68,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   dayBadge: {
+    width: 40,
+    height: 20,
+    fontSize: 20,
     backgroundColor: "#6200ea",
     marginHorizontal: 5,
   },
