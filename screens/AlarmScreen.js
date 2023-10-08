@@ -44,6 +44,7 @@ export default function AlarmScreen() {
         renderItem={({ item }) => (
           <AlarmCard time={item.time} days={item.days} />
         )}
+        style={styles.flatStyle}
       />
       <Button
         title="アラーム設定"
@@ -76,5 +77,8 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: "bold",
+  },
+  flatStyle: {
+    width: "100%",
   },
 });
