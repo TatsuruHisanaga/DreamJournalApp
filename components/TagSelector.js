@@ -1,14 +1,15 @@
+// TagSelector.js
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const tags = [
   { label: '喜び', value: 'joy', icon: 'emoticon-happy-outline' },
-  { label: '怒り', value: 'anger', icon: 'emoticon-angry-outline' },
+  { label: '期待', value: 'anticipation', icon: 'emoticon-excited-outline' },
   { label: '驚き', value: 'surprise', icon: 'emoticon-dead-outline' },
+  { label: '怒り', value: 'anger', icon: 'emoticon-angry-outline' },
   { label: '悲しみ', value: 'sadness', icon: 'emoticon-sad-outline' },
   { label: '恐怖', value: 'fear', icon: 'emoticon-frown-outline' },
-  { label: '期待', value: 'anticipation', icon: 'emoticon-excited-outline' },
   { label: '嫌悪', value: 'disgust', icon: 'emoticon-poop-outline' },
   // 他のタグもここに追加
 ];
