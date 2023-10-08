@@ -32,7 +32,7 @@ export default function AlarmScreen() {
     setTime(selectedTime || time);
   };
 
-  const [isAlarmRinging, setIsAlarmRinging] = useState(true); //trueの時にカウントアップが始まる
+  const [isAlarmRinging, setIsAlarmRinging] = useState(false); //trueの時にカウントアップが始まる
 
   return (
     <View style={styles.container}>
@@ -49,12 +49,6 @@ export default function AlarmScreen() {
         title="アラーム設定"
         onPress={toggleOverlay}
         containerStyle={{ marginBottom: 30 }}
-      />
-      <Button
-        title="demo start alarm"
-        onPress={() => {
-          setIsAlarmRinging(true);
-        }}
       />
 
       <AlarmSettingOverlay

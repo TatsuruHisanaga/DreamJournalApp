@@ -1,11 +1,6 @@
-import React, { useState } from 'react';
-import { View, FlatList } from 'react-native';
-import { Button } from 'react-native-elements';
-import AlarmCard from '../components/AlarmCard';
-import AlarmSettingOverlay from '../components/AlarmSettingOverlay';
-import RankingView from './RankingView';
+import React from 'react';
+import { View } from 'react-native';
 import DreamJournalCard from '../components/DreamJournalCard';
-import RingingAlarm from '../components/RingingAlarm';
 
 export default function HomeView() {
 

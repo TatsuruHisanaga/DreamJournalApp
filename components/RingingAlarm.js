@@ -2,25 +2,26 @@ import React, { useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Overlay } from "react-native-elements";
 import { Stopwatch } from "react-native-stopwatch-timer";
+import { Audio } from "expo-av";
 
 export default function RingingAlarm({ isAlarmRinging, setIsAlarmRinging }) {
-  const playSound = async () => {
-    await Audio.setAudioModeAsync({ playsInSilentModeIOS: true });
-    const { sound: playbackObject } = await Audio.Sound.createAsync(
-      { uri: 'http://foo/bar.mp3' },
-      { shouldPlay: true }
-    );
-    alert("Beep! Beep!");
+  const sound = new Audio.Sound();
+
+  async function audio() {
+    await sound.loadAsync(require("../assets/chicken_alarm.mp3"));
+    await sound.playAsync();
+  }
+
+  const stop = async () => {
+    await sound.stopAsync();
+    await sound.unloadAsync();
   };
 
   useEffect(() => {
-    return () => {
-      if(isAlarmRinging) playSound();
-      else {
-        alert("Alarm stopped");
-      }
+    if (isAlarmRinging) {
+      audio();
     }
-  },[]);
+  } , [isAlarmRinging]);
 
   return (
     <Overlay isVisible={isAlarmRinging}>
@@ -28,7 +29,10 @@ export default function RingingAlarm({ isAlarmRinging, setIsAlarmRinging }) {
         <Text>Beep! Beep!</Text>
         <Stopwatch lap msecs start={isAlarmRinging} options={options} />
         <TouchableOpacity
-          onPress={() => setIsAlarmRinging(!isAlarmRinging)}
+          onPress={() => {
+            setIsAlarmRinging(!isAlarmRinging);
+            stop();
+          }}
           style={styles.touchableOpacity}
         >
           <Text style={styles.body}>Stop</Text>
