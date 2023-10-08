@@ -6,6 +6,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 const tags = [
   { label: '喜び', value: 'joy', icon: 'emoticon-happy-outline' },
   { label: '期待', value: 'anticipation', icon: 'emoticon-excited-outline' },
+  { label: '幸せ', value: 'happy', icon: 'emoticon-outline' },
   { label: '驚き', value: 'surprise', icon: 'emoticon-dead-outline' },
   { label: '怒り', value: 'anger', icon: 'emoticon-angry-outline' },
   { label: '悲しみ', value: 'sadness', icon: 'emoticon-sad-outline' },
@@ -25,12 +26,15 @@ export default function TagSelector({ selectedTags, setSelectedTags }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>Tags</Text>
+      <Text style={styles.label}>タグ</Text>
       <View style={styles.tagContainer}>
         {tags.map((tag, index) => (
           <TouchableOpacity
             key={index}
-            style={[styles.tag, selectedTags.includes(tag.value) && styles.selectedTag]}
+            style={[
+              styles.tag,
+              selectedTags.includes(tag.value) && styles.selectedTag,
+            ]}
             onPress={() => toggleTag(tag.value)}
           >
             <MaterialCommunityIcons name={tag.icon} size={18} color="gray" />
@@ -69,7 +73,6 @@ const styles = StyleSheet.create({
   },
   tagLabel: {
     fontSize: 14,
-    marginLeft: 4, 
+    marginLeft: 4,
   },
 });
-

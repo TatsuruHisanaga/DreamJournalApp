@@ -26,19 +26,6 @@ function TabNavigator() {
         }}
       />
       <Tab.Screen
-        name="ランキング"
-        component={RankingView}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons
-              name="star-outline"
-              color={color}
-              size={24}
-            />
-          ),
-        }}
-      />
-      <Tab.Screen
         name="夢日記"
         component={DreamJournalScreen}
         options={{
@@ -57,6 +44,19 @@ function TabNavigator() {
         options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="alarm" color={color} size={24} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="ランキング"
+        component={RankingView}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons
+              name="star-outline"
+              color={color}
+              size={24}
+            />
           ),
         }}
       />
