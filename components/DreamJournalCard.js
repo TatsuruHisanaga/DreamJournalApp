@@ -1,86 +1,57 @@
-import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+// DreamJournalCard.js
+import DreamJournalCommonCard from './DreamJournalCommonCard';
+
+const tags = [
+  {
+    label: '喜び',
+    value: 'joy',
+    icon: 'emoticon-happy-outline',
+    color: '#FFF4CC',
+  },
+  {
+    label: '幸せ',
+    value: 'happy',
+    icon: 'emoticon-outline',
+    color: '#E0F2FE',
+  },
+  {
+    label: '怒り',
+    value: 'anger',
+    icon: 'emoticon-angry-outline',
+    color: '#FFD1D1',
+  },
+  {
+    label: '驚き',
+    value: 'surprise',
+    icon: 'emoticon-dead-outline',
+    color: '#CCECEC',
+  },
+  {
+    label: '悲しみ',
+    value: 'sadness',
+    icon: 'emoticon-sad-outline',
+    color: '#CCE0F5',
+  },
+  {
+    label: '恐怖',
+    value: 'fear',
+    icon: 'emoticon-frown-outline',
+    color: '#E6CCFF',
+  },
+  {
+    label: '期待',
+    value: 'anticipation',
+    icon: 'emoticon-excited-outline',
+    color: '#F0FFE0',
+  },
+  {
+    label: '嫌悪',
+    value: 'disgust',
+    icon: 'emoticon-poop-outline',
+    color: '#E0C2A2',
+  },
+];
 
 export default function DreamJournalCard({ entry }) {
-  function formatDate(dateString) {
-    const date = new Date(dateString);
-    const day = date.getDate();
-    const month = date.getMonth() + 1; // 月は0から始まるため、+1が必要
-    const dayOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][date.getDay()];
-    return `${dayOfWeek} ${month}/${day}`;
-  }
-  
-  return (
-    <View style={styles.card}>
-      {entry.dreamImage && ( 
-        <Image source={{ uri: entry.dreamImage }} style={styles.dreamImage} />
-      )}
-      <View style={styles.header}>
-        <Text style={styles.date}>{formatDate(entry.date)}</Text>
-        <Text style={styles.name}>{/* {entry.name} */}</Text>
-      </View>
-      {/* <Image source={{ uri: entry.image }} style={styles.dreamImage} /> */}
-      <Text style={styles.title}>{entry.title}</Text>
-      <Text style={styles.details}>{entry.details}</Text>
-    </View>
-  );
+  return <DreamJournalCommonCard entry={entry} tags={tags} />;
 }
-
-const styles = StyleSheet.create({
-  card: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 10,
-    padding: 16,
-    marginBottom: 20,
-    backgroundColor: '#fff',
-    width: '85%',
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 6,
-  },
-  dreamImage: {
-    width: '100%',  // 横幅を100%に設定
-    aspectRatio: 1, // アスペクト比を維持（この場合は1:1）
-    borderRadius: 10,
-    marginBottom: 12,
-    resizeMode: 'cover', // 画像をカバーとして表示
-
-    // iOS用の影設定
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-
-    // Android用の影設定
-    elevation: 5,
-  },
-  name: {
-    fontWeight: 'bold',
-    flex: 1,
-  },
-  date: {
-    color: '#aaa',
-  },
-  dreamImage: {
-    width: '100%',
-    height: 200,
-    borderRadius: 10,
-    marginBottom: 12,
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 8,
-  },
-  details: {
-    fontSize: 14,
-    color: '#555',
-  },
-});
-

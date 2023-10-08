@@ -13,11 +13,28 @@ function TabNavigator() {
   return (
     <Tab.Navigator initialRouteName="ホーム">
       <Tab.Screen
-        name="ランキング"
-        component={RankingView}
+        name="ホーム"
+        component={HomeView}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="star" color={color} size={24} />
+            <MaterialCommunityIcons
+              name="home-outline"
+              color={color}
+              size={24}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="夢日記"
+        component={DreamJournalScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons
+              name="notebook-outline"
+              color={color}
+              size={24}
+            />
           ),
         }}
       />
@@ -31,29 +48,28 @@ function TabNavigator() {
         }}
       />
       <Tab.Screen
-        name="ホーム"
-        component={HomeView}
+        name="統計"
+        component={RankingView}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="home" color={color} size={24} />
+            <MaterialCommunityIcons
+              name="star-outline"
+              color={color}
+              size={24}
+            />
           ),
         }}
       />
       <Tab.Screen
-        name="夢日記"
-        component={DreamJournalScreen}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="book" color={color} size={24} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="プロフィール"
+        name="マイページ"
         component={ProfileScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="account" color={color} size={24} />
+            <MaterialCommunityIcons
+              name="account-outline"
+              color={color}
+              size={24}
+            />
           ),
         }}
       />
