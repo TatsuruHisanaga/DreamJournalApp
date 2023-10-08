@@ -23,6 +23,7 @@ export default function AlarmSettingOverlay({
   onTimeChange,
   days,
   setDays,
+  setIsAlarmRinging,
 }) {
   const scheduleNotification = async (time) => {
     try {
@@ -48,9 +49,7 @@ export default function AlarmSettingOverlay({
   useEffect(() => {
     notificationListener.current =
       Notifications.addNotificationReceivedListener(() => {
-        console.log("Notification received");
-        // 通知を受け取った時の処理ここに追加できる
-        alert("通知を受け取りました！");
+        setIsAlarmRinging(true);
       });
 
     return () => {
