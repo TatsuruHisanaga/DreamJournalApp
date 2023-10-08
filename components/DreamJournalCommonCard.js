@@ -37,16 +37,12 @@ export default function DreamJournalCommonCard({ entry, tags }) {
     ratingBarColor = 'red';
   }
 
-  const defaultImageUri =
-    'https://images.unsplash.com/photo-1496337589254-7e19d01cec44?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2670&q=80';
-
   return (
     <Surface style={styles.card} elevation={1}>
       <View style={styles.imageWrapper}>
-        <Image
-          source={{ uri: entry.dreamImage || defaultImageUri }}
-          style={styles.dreamImage}
-        />
+        {entry.dreamImage && (
+          <Image source={{ uri: entry.dreamImage }} style={styles.dreamImage} />
+        )}
       </View>
       <View style={styles.header}>
         <Text style={styles.date}>{formatDate(entry.date, entry.date)}</Text>
