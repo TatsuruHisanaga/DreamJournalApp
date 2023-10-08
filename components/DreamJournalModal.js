@@ -102,10 +102,6 @@ export default function DreamJournalModal(props) {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => setModalVisible(true)}>
-        <Text>夢日記を記録する</Text>
-      </TouchableOpacity>
-
       <Modal
         animationType="slide"
         transparent={true}
