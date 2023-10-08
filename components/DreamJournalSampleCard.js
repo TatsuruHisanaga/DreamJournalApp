@@ -22,8 +22,8 @@ export const sampleEntries = [
     dreamImage: 'https://images-ext-1.discordapp.net/external/HQhJh9wEeXe8qywMVuojyLeZrAWI1lCHg2xKoBRfTxw/%3Fpid%3DImgGn/https/th.bing.com/th/id/OIG.d4Y01UJVRwYiJ8TCJ7VB?width=1266&height=1266',
     date: 'Mon 9/25',
     title: '空を飛びつづける夢',
-    details: '青い空と白い雲の間を自由に飛び回ってた。風が顔に当たる感覚がとても心地よかった。',
-    selectedTags: ['joy', 'anticipation'],
+    details: '青い空と白い雲の間を自由に飛び回ってた。\n風が顔に当たる感覚がとても心地よかった。',
+    selectedTags: ['joy', 'happy'],
     wakeUpRating: 5,
   },
   {

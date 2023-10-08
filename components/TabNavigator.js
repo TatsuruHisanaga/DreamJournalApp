@@ -53,7 +53,7 @@ function TabNavigator() {
         options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
-              name="star-outline"
+              name="chart-bar"
               color={color}
               size={24}
             />
