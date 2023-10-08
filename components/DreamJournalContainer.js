@@ -23,7 +23,7 @@ export default function DreamJournalContainer({
   }, []);
 
   return (
-    <ScrollView style={{ marginHorizontal: 12, paddingTop: 20}} >
+    <ScrollView style={{ marginHorizontal: 12, paddingTop: 20, marginBottom: 12}} >
       {sampleEntries.map((entry, index) => (
         <DreamJournalSampleCard key={index} entry={entry} />
       ))}

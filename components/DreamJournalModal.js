@@ -252,7 +252,7 @@ const styles = StyleSheet.create({
   },
   fixedButton: {
     position: 'absolute',
-    bottom: 0,
+    bottom: -12,
 
   },
   // button: {
