@@ -8,7 +8,6 @@ import DreamJournalCard from '../components/DreamJournalCard';
 import RingingAlarm from '../components/RingingAlarm';
 
 export default function HomeView() {
-  const [isAlarmRinging, setIsAlarmRinging] = useState(true); //trueの時にカウントアップが始まる
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -20,10 +19,6 @@ export default function HomeView() {
           title: 'テストの夢のタイトル',
           details: 'テストの夢の詳細',
         }}
-      />
-      <RingingAlarm
-        isAlarmRinging={isAlarmRinging}
-        setIsAlarmRinging={setIsAlarmRinging}
       />
     </View>
   );

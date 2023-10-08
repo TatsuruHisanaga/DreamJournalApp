@@ -1,9 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Overlay } from "react-native-elements";
 import { Stopwatch } from "react-native-stopwatch-timer";
 
 export default function RingingAlarm({ isAlarmRinging, setIsAlarmRinging }) {
+  const playSound = async () => {
+    await Audio.setAudioModeAsync({ playsInSilentModeIOS: true });
+    const { sound: playbackObject } = await Audio.Sound.createAsync(
+      { uri: 'http://foo/bar.mp3' },
+      { shouldPlay: true }
+    );
+    alert("Beep! Beep!");
+  };
+
+  useEffect(() => {
+    return () => {
+      if(isAlarmRinging) playSound();
+      else {
+        alert("Alarm stopped");
+      }
+    }
+  },[]);
+
   return (
     <Overlay isVisible={isAlarmRinging}>
       <View>

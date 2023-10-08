@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "react-native-elements";
 import AlarmSettingOverlay from "../components/AlarmSettingOverlay";
 import { View, Text, StyleSheet, FlatList } from "react-native";
 import AlarmCard from "../components/AlarmCard";
+import RingingAlarm from "../components/RingingAlarm";
 
 export default function AlarmScreen() {
   const [alarms, setAlarms] = useState([]);
@@ -31,6 +32,8 @@ export default function AlarmScreen() {
     setTime(selectedTime || time);
   };
 
+  const [isAlarmRinging, setIsAlarmRinging] = useState(true); //trueの時にカウントアップが始まる
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>アラーム一覧</Text>
@@ -47,6 +50,12 @@ export default function AlarmScreen() {
         onPress={toggleOverlay}
         containerStyle={{ marginBottom: 30 }}
       />
+      <Button
+        title="demo start alarm"
+        onPress={() => {
+          setIsAlarmRinging(true);
+        }}
+      />
 
       <AlarmSettingOverlay
         visible={visible}
@@ -56,7 +65,9 @@ export default function AlarmScreen() {
         onTimeChange={onTimeChange}
         days={days}
         setDays={setDays}
+        setIsAlarmRinging={setIsAlarmRinging}
       />
+      <RingingAlarm isAlarmRinging={isAlarmRinging} setIsAlarmRinging={setIsAlarmRinging}/>
     </View>
   );
 }
