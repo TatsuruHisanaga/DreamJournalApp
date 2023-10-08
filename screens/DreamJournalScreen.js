@@ -1,14 +1,11 @@
 // DreamJournalScreen.js
 import React, { useState } from 'react';
-import { View, ScrollView, StyleSheet } from 'react-native';
-import DreamJournalCard from '../components//DreamJournalCard';
-import DreamJournalSampleCard from '../components/DreamJournalSampleCard';
+import { View,  StyleSheet } from 'react-native';
 import DreamJournalModal from '../components/DreamJournalModal';
 import DreamJournalContainer from '../components/DreamJournalContainer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function DreamJournalScreen() {
-  const [modalVisible, setModalVisible] = useState(false);
   const [entries, setEntries] = useState([]);
   // データの保存
   const handleSave = async (entry) => {

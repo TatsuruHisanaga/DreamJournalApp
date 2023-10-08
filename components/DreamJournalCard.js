@@ -23,7 +23,6 @@ export default function DreamJournalCard({ entry }) {
         <Text style={styles.date}>{formatDate(entry.date)}</Text>
         <Text style={styles.name}>{/* {entry.name} */}</Text>
       </View>
-      {/* <Image source={{ uri: entry.image }} style={styles.dreamImage} /> */}
       <Text style={styles.title}>{entry.title}</Text>
       <Text style={styles.details}>{entry.details}</Text>
     </View>
