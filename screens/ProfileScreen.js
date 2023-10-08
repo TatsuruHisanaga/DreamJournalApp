@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from 'react-native';
 export default function ProfileScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>プロフィール</Text>
+      <Text style={styles.title}>マイページ（準備中🥺）</Text>
       {/* ここにプロフィール情報を表示するコードを追加 */}
     </View>
   );

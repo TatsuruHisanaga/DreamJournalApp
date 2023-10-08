@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from 'react-native';
 export default function AlarmScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>アラーム一覧</Text>
+      <Text style={styles.title}>アラーム一覧（準備中🥺）</Text>
       {/* ここにアラームの一覧を表示するコードを追加 */}
     </View>
   );
