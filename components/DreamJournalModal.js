@@ -14,7 +14,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import DreamInput from './DreamInput';
 import DreamPicker from './DreamPicker';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'; // アイコンのインポート
+import { Icon } from 'react-native-elements';
 
 export default function DreamJournalModal(props) {
   const [title, setTitle] = useState('');
@@ -103,7 +103,7 @@ export default function DreamJournalModal(props) {
   return (
     <View style={styles.container}>
       <Modal
-        animationType="slide"
+        animationType="fade"
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => {
@@ -162,16 +162,29 @@ export default function DreamJournalModal(props) {
               />
               <View>
                 <Button
+                  style={styles.button}
                   title="記録する"
                   onPress={handleSaveButton}
                   disabled={!isInputValid}
                 />
-                <Button title="閉じる" onPress={() => setModalVisible(false)} />
+                <Button
+                  style={styles.button}
+                  title="閉じる"
+                  onPress={() => setModalVisible(false)}
+                />
               </View>
             </ScrollView>
           </View>
         </View>
       </Modal>
+      <Icon
+        containerStyle={styles.fixedButton}
+        raised
+        name="plus"
+        type="material-community"
+        color="#517fa4"
+        onPress={() => setModalVisible(true)}
+      />
     </View>
   );
 }
@@ -179,6 +192,8 @@ export default function DreamJournalModal(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: 'center',
+    width: '100%',
     padding: 16,
     margin: 16,
   },
@@ -235,4 +250,12 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginLeft: 32,
   },
+  fixedButton: {
+    position: 'absolute',
+    bottom: 0,
+
+  },
+  // button: {
+  //   margin: 16,
+  // },
 });
