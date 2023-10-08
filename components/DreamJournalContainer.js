@@ -2,8 +2,9 @@
 import React, { useEffect } from 'react';
 import { ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import DreamJournalModal from './DreamJournalModal';
 import DreamJournalCard from './DreamJournalCard';
+import DreamJournalSampleCard, { sampleEntries }  from '../components/DreamJournalSampleCard';
+
 
 export default function DreamJournalContainer({ handleSave, entries, setEntries }) {
   // データの読み込み
@@ -19,6 +20,9 @@ export default function DreamJournalContainer({ handleSave, entries, setEntries 
 
   return (
     <ScrollView>
+            {sampleEntries.map((entry, index) => (
+        <DreamJournalSampleCard key={index} entry={entry} />
+      ))}
       {entries.map((entry, index) => (
         <DreamJournalCard key={index} entry={entry} />
       ))}

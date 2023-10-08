@@ -5,6 +5,7 @@ import AlarmCard from '../components/AlarmCard';
 import AlarmSettingOverlay from '../components/AlarmSettingOverlay';
 import RankingView from './RankingView';
 import DreamJournalCard from '../components/DreamJournalCard';
+import DreamJournalSampleCard from '../components/DreamJournalSampleCard';
 import RingingAlarm from '../components/RingingAlarm';
 
 export default function HomeView() {
