@@ -4,7 +4,7 @@ import DreamJournalCommonCard from './DreamJournalCommonCard';
 export const sampleEntries = [
   {
     dreamImage: 'https://images.unsplash.com/photo-1537186121022-6b14d84aafea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2669&q=80',
-    date: 'Mon 9/25',
+    date: 'Sat 9/23',
     title: '２億年前にタイムトラベルして絶望',
     details: '見たことないでかいタコに追いかけ回され続ける夢。',
     selectedTags: ['fear'],
@@ -12,15 +12,15 @@ export const sampleEntries = [
   },
   {
     dreamImage: 'https://images.unsplash.com/photo-1496337589254-7e19d01cec44?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2670&q=80',
-    date: 'Sat 9/23',
+    date: 'Sun 9/24',
     title: 'DJになってクラブで熱狂',
     details: '私はDJとしてクラブの中心に立っていた。集まった人々は音楽に身を任せ、狂ったように踊り続ける。私の目の前には熱心なファンたちの海が広がっていた。スモークマシンの煙が会場を神秘的に包み込み、ディスコボールの光が輝いていた。',
     selectedTags: ['happy', 'joy', 'anticipation'],
     wakeUpRating: 4,
   },
   {
-    dreamImage: 'https://images.unsplash.com/photo-1522220610078-4a5bd9d9c51b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2673&q=80',
-    date: 'Sun 9/24',
+    dreamImage: 'https://images-ext-1.discordapp.net/external/HQhJh9wEeXe8qywMVuojyLeZrAWI1lCHg2xKoBRfTxw/%3Fpid%3DImgGn/https/th.bing.com/th/id/OIG.d4Y01UJVRwYiJ8TCJ7VB?width=1266&height=1266',
+    date: 'Mon 9/25',
     title: '空を飛びつづける夢',
     details: '青い空と白い雲の間を自由に飛び回ってた。風が顔に当たる感覚がとても心地よかった。',
     selectedTags: ['joy', 'anticipation'],
@@ -31,11 +31,11 @@ export const sampleEntries = [
     date: 'Tue 9/26',
     title: '宝を探しに冒険',
     details: '古い地図を手に入れ、宝を探しに行った。途中で多くの困難に遭遇したが、最後には宝を見つけた。',
-    selectedTags: ['joy', 'anticipation'],
+    selectedTags: ['anticipation', 'surprise'],
     wakeUpRating: 4,
   },
   {
-    // dreamImage: 'https://example.com/image5.jpg',
+    dreamImage: 'https://images-ext-2.discordapp.net/external/ipqz0gihABGp-VAFnUelgKaY0xewOgVMlFFuZrX9KkE/%3Fpid%3DImgGn/https/th.bing.com/th/id/OIG.2YEgyncR2EUT7NldCecB?width=1266&height=1266',
     date: 'Thu 9/28',
     title: '未知の惑星で地球外生命体に追いかけ回される',
     details: '宇宙船が破損して未知の惑星に着陸。謎の生物に追いかけ回されて怖かった。',
