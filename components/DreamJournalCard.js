@@ -1,17 +1,53 @@
+// DreamJournalCard.js
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Surface } from 'react-native-paper';
 
 const tags = [
-  { label: '喜び', value: 'joy', icon: 'emoticon-happy-outline', color: '#FFF4CC' },
-  { label: '怒り', value: 'anger', icon: 'emoticon-angry-outline', color: '#FFD1D1' },
-  { label: '驚き', value: 'surprise', icon: 'emoticon-dead-outline', color: '#CCECEC' },
-  { label: '悲しみ', value: 'sadness', icon: 'emoticon-sad-outline', color: '#CCE0F5' },
-  { label: '恐怖', value: 'fear', icon: 'emoticon-frown-outline', color: '#E6CCFF' },
-  { label: '期待', value: 'anticipation', icon: 'emoticon-excited-outline', color: '#F0FFE0' },
-  { label: '嫌悪', value: 'disgust', icon: 'emoticon-poop-outline', color: '#E0C2A2' },
+  {
+    label: '喜び',
+    value: 'joy',
+    icon: 'emoticon-happy-outline',
+    color: '#FFF4CC',
+  },
+  {
+    label: '怒り',
+    value: 'anger',
+    icon: 'emoticon-angry-outline',
+    color: '#FFD1D1',
+  },
+  {
+    label: '驚き',
+    value: 'surprise',
+    icon: 'emoticon-dead-outline',
+    color: '#CCECEC',
+  },
+  {
+    label: '悲しみ',
+    value: 'sadness',
+    icon: 'emoticon-sad-outline',
+    color: '#CCE0F5',
+  },
+  {
+    label: '恐怖',
+    value: 'fear',
+    icon: 'emoticon-frown-outline',
+    color: '#E6CCFF',
+  },
+  {
+    label: '期待',
+    value: 'anticipation',
+    icon: 'emoticon-excited-outline',
+    color: '#F0FFE0',
+  },
+  {
+    label: '嫌悪',
+    value: 'disgust',
+    icon: 'emoticon-poop-outline',
+    color: '#E0C2A2',
+  },
 ];
-
 
 export default function DreamJournalCard({ entry }) {
   function formatDate(dateString) {
@@ -31,7 +67,7 @@ export default function DreamJournalCard({ entry }) {
   };
 
   return (
-    <View style={styles.card}>
+    <Surface style={styles.card} elevation={1}>
       {entry.dreamImage && (
         <View style={styles.imageWrapper}>
           <Image source={{ uri: entry.dreamImage }} style={styles.dreamImage} />
@@ -52,23 +88,18 @@ export default function DreamJournalCard({ entry }) {
                 key={index}
                 style={[styles.tag, { backgroundColor: tagInfo.color }]}
               >
-                <MaterialCommunityIcons
-                  name={tagInfo.icon}
-                  size={18}
-                />
+                <MaterialCommunityIcons name={tagInfo.icon} size={18} />
                 <Text style={styles.tagLabel}>{tagInfo.label}</Text>
               </View>
             );
           })}
       </View>
-    </View>
+    </Surface>
   );
 }
 
 const styles = StyleSheet.create({
   card: {
-    borderWidth: 1,
-    borderColor: '#ccc',
     borderRadius: 10,
     padding: 16,
     marginBottom: 20,
@@ -87,17 +118,6 @@ const styles = StyleSheet.create({
   date: {
     color: '#aaa',
   },
-  // imageWrapper: {
-  //   elevation: 10,
-  //   borderRadius: 10,
-  //   shadowColor: "#000",
-  //   shadowOffset: {
-  //     width: 0,
-  //     height: 200,
-  //   },
-  //   shadowOpacity: 0.25,
-  //   shadowRadius: 3.84,
-  // },
   dreamImage: {
     height: 200,
     borderRadius: 10,

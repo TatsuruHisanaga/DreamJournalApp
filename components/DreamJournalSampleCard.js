@@ -1,6 +1,8 @@
 // DreamJournalSampleCard.js
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
+import { Surface } from 'react-native-paper';
+
 
 export const sampleEntries = [
   {
@@ -99,7 +101,7 @@ export const sampleEntries = [
 export default function DreamJournalSampleCard({ entry }) {
 
   return (
-    <View style={styles.card}>
+    <Surface style={styles.card} elevation={1}>
       {entry.dreamImage && (
         <View style={styles.imageWrapper}>
           <Image source={{ uri: entry.dreamImage }} style={styles.dreamImage} />
@@ -111,14 +113,12 @@ export default function DreamJournalSampleCard({ entry }) {
       </View>
       <Text style={styles.title}>{entry.title}</Text>
       <Text style={styles.details}>{entry.details}</Text>
-    </View>
+    </Surface>
   );
 }
 
 const styles = StyleSheet.create({
   card: {
-    borderWidth: 1,
-    borderColor: '#ccc',
     borderRadius: 10,
     padding: 16,
     marginBottom: 20,

@@ -3,10 +3,14 @@ import React, { useEffect } from 'react';
 import { ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DreamJournalCard from './DreamJournalCard';
-import DreamJournalSampleCard, { sampleEntries }  from '../components/DreamJournalSampleCard';
+import DreamJournalSampleCard, {
+  sampleEntries,
+} from '../components/DreamJournalSampleCard';
 
-
-export default function DreamJournalContainer({ handleSave, entries, setEntries }) {
+export default function DreamJournalContainer({
+  entries,
+  setEntries,
+}) {
   // データの読み込み
   useEffect(() => {
     const fetchEntries = async () => {
@@ -19,8 +23,8 @@ export default function DreamJournalContainer({ handleSave, entries, setEntries 
   }, []);
 
   return (
-    <ScrollView>
-            {sampleEntries.map((entry, index) => (
+    <ScrollView style={{ marginHorizontal: 12, paddingTop: 20}} >
+      {sampleEntries.map((entry, index) => (
         <DreamJournalSampleCard key={index} entry={entry} />
       ))}
       {entries.map((entry, index) => (
@@ -29,5 +33,3 @@ export default function DreamJournalContainer({ handleSave, entries, setEntries 
     </ScrollView>
   );
 }
-
-
