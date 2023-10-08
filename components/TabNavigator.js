@@ -48,7 +48,7 @@ function TabNavigator() {
         }}
       />
       <Tab.Screen
-        name="ランキング"
+        name="統計"
         component={RankingView}
         options={{
           tabBarIcon: ({ color, size }) => (
