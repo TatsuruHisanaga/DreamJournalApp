@@ -5,7 +5,6 @@ import {
   View,
   Text,
   StyleSheet,
-  Button,
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
@@ -16,6 +15,7 @@ import DreamPicker from './DreamPicker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Icon } from 'react-native-elements';
 import Slider from '@react-native-community/slider';
+import { Button } from 'react-native-paper';
 
 export default function DreamJournalModal(props) {
   const [title, setTitle] = useState('');
@@ -117,8 +117,8 @@ export default function DreamJournalModal(props) {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <ScrollView>
-              <Text style={styles.label}>Date</Text>
-              <TouchableOpacity onPress={() => setShowDatePicker(true)}>
+              <Text style={styles.label}>日付</Text>
+              <TouchableOpacity style={{marginLeft: 16}} onPress={() => setShowDatePicker(true)}>
                 <Text styles={styles.date}>{formatDateToJapanese(date)}</Text>
               </TouchableOpacity>
               {showDatePicker && (
@@ -133,14 +133,14 @@ export default function DreamJournalModal(props) {
                 label="タイトル"
                 value={title}
                 onChangeText={setTitle}
-                placeholder="夢のタイトルを入力しましょう"
+                placeholder="例）ハンバーガーを100個食う夢"
               />
               <DreamInput
                 label="詳細"
                 value={details}
                 onChangeText={setDetails}
                 multiline
-                placeholder="夢の内容を入力しましょう"
+                placeholder="例）マクドでハンバーガーを100個食べたら、お腹が痛くなった。急いでトイレに行ったら、そこには得体の知れないドラゴンがいて、私を食べようと追いかけまわしてきた。"
               />
               <Text style={styles.label}>寝起きの良さ</Text>
               <Slider
@@ -173,18 +173,22 @@ export default function DreamJournalModal(props) {
                 selectedTags={selectedTags}
                 setSelectedTags={setSelectedTags}
               />
-              <View>
+              <View style={styles.buttonContainer} >
                 <Button
+                  mode="contained"
                   style={styles.button}
-                  title="記録する"
                   onPress={handleSaveButton}
                   disabled={!isInputValid}
-                />
-                <Button
+                >
+                  記録する
+                </Button>
+                <Button 
+                  mode="outlined"
                   style={styles.button}
-                  title="閉じる"
                   onPress={() => setModalVisible(false)}
-                />
+                >
+                  閉じる
+                </Button>
               </View>
             </ScrollView>
           </View>
@@ -267,7 +271,12 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: -12,
   },
-  // button: {
-  //   margin: 16,
-  // },
+  buttonContainer: {
+    alignItems: 'center',
+  },
+  button: {
+    margin: 8,
+    width: '70%',
+    alignItems: 'center',
+  },
 });
