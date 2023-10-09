@@ -21,7 +21,7 @@ const RankingList = ({ data, userData }) => {
       case 2: // 3位
         return styles.thirdPlace;
       default:
-        return null;
+        return styles.otherPlace;
     }
   }
 
@@ -65,13 +65,16 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   firstPlace: {
-    backgroundColor: 'gold',
+    backgroundColor: '#d1beed',
   },
   secondPlace: {
-    backgroundColor: 'silver',
+    backgroundColor: '#d1beed',
   },
   thirdPlace: {
-    backgroundColor: '#cd7f32', // bronze color
+    backgroundColor: '#d1beed',
+  },
+  otherPlace: {
+    backgroundColor: '#eae4f2'
   },
   avatar: {
     width: 40,
