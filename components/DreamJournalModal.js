@@ -14,8 +14,8 @@ import DreamInput from './DreamInput';
 import DreamPicker from './DreamPicker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Icon } from 'react-native-elements';
-import Slider from '@react-native-community/slider';
 import { Button } from 'react-native-paper';
+import { Rating } from 'react-native-elements';
 
 export default function DreamJournalModal(props) {
   const [title, setTitle] = useState('');
@@ -118,7 +118,10 @@ export default function DreamJournalModal(props) {
           <View style={styles.modalView}>
             <ScrollView>
               <Text style={styles.label}>日付</Text>
-              <TouchableOpacity style={{marginLeft: 16}} onPress={() => setShowDatePicker(true)}>
+              <TouchableOpacity
+                style={{ marginLeft: 16 }}
+                onPress={() => setShowDatePicker(true)}
+              >
                 <Text styles={styles.date}>{formatDateToJapanese(date)}</Text>
               </TouchableOpacity>
               {showDatePicker && (
@@ -143,13 +146,15 @@ export default function DreamJournalModal(props) {
                 placeholder="例）マクドでハンバーガーを100個食べたら、お腹が痛くなった。急いでトイレに行ったら、そこには得体の知れないドラゴンがいて、私を食べようと追いかけまわしてきた。"
               />
               <Text style={styles.label}>寝起きの良さ</Text>
-              <Slider
-                style={{ width: '100%', height: 40, alignItems: 'center' }}
-                minimumValue={1}
-                maximumValue={5}
-                step={1}
-                value={wakeUpRating}
-                onValueChange={(value) => setWakeUpRating(value)}
+              <Rating
+                showRating
+                jumpValue	={1.0}
+                type="star"
+                fractions={1}
+                startingValue={wakeUpRating}
+                imageSize={32}
+                onFinishRating={(value) => setWakeUpRating(value)}
+
               />
               {/* <DreamPicker
                 label="場所"
@@ -173,7 +178,7 @@ export default function DreamJournalModal(props) {
                 selectedTags={selectedTags}
                 setSelectedTags={setSelectedTags}
               />
-              <View style={styles.buttonContainer} >
+              <View style={styles.buttonContainer}>
                 <Button
                   mode="contained"
                   style={styles.button}
@@ -182,7 +187,7 @@ export default function DreamJournalModal(props) {
                 >
                   記録する
                 </Button>
-                <Button 
+                <Button
                   mode="outlined"
                   style={styles.button}
                   onPress={() => setModalVisible(false)}
