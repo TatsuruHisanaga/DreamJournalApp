@@ -74,6 +74,7 @@ export default function AlarmScreen() {
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: 40,
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
@@ -81,7 +82,6 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontWeight: "bold",
   },
   flatStyle: {
     width: "100%",
