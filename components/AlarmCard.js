@@ -16,7 +16,12 @@ export default function AlarmCard({ time, days, isActive, toggleAlarm }) {
       </View>
       <View style={styles.gridContainer}>
         <View style={styles.timeContainer}>
-          <Text style={styles.time}>{time.toLocaleTimeString()}</Text>
+          <Text style={styles.time}>
+            {time.toLocaleTimeString([], {
+              hour: "2-digit",
+              minute: "2-digit",
+            })}
+          </Text>
         </View>
         <View style={styles.switchContainer}>
           <Switch value={isActive} onValueChange={toggleAlarm} />
@@ -53,7 +58,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   time: {
-    fontSize: 45,
+    fontSize: 60,
   },
   dayText: {
     color: "#fff",
@@ -68,14 +73,12 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   dayBadge: {
-    width: 40,
-    height: 20,
     fontSize: 20,
     backgroundColor: "#6200ea",
     marginHorizontal: 5,
   },
   dayBadge2: {
-    backgroundColor: "#3d3d3d",
+    backgroundColor: "#c3c5c7",
     marginHorizontal: 5,
   },
 });
