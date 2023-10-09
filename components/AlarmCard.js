@@ -1,7 +1,12 @@
 import React from "react";
 import { Text, View, StyleSheet } from "react-native";
 import { Card, Badge, Switch } from "react-native-elements";
-export default function AlarmCard({ time, days, isActive, toggleAlarm }) {
+export default function AlarmCard({ time, days, isActive, index, activeArray, setActiveArray }) {
+  const handleToggleSwitch = () => {
+    const newActiveArray = [...activeArray];
+    newActiveArray[index] = !newActiveArray[index];
+    setActiveArray(newActiveArray);
+  }
   return (
     <Card containerStyle={styles.cardContainer}>
       <View style={styles.daysContainer}>
@@ -24,7 +29,7 @@ export default function AlarmCard({ time, days, isActive, toggleAlarm }) {
           </Text>
         </View>
         <View style={styles.switchContainer}>
-          <Switch value={isActive} onValueChange={toggleAlarm} />
+          <Switch value={isActive} onValueChange={handleToggleSwitch} trackColor={{false: '#c3c5c7', true: '#6200ea'}}/>
         </View>
       </View>
     </Card>

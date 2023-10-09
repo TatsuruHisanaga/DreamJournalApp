@@ -20,6 +20,8 @@ export default function AlarmScreen() {
     Sun: false,
   });
 
+  const [activeArray, setActiveArray] = useState([]);
+
   const toggleOverlay = () => {
     setVisible(!visible);
   };
@@ -42,8 +44,8 @@ export default function AlarmScreen() {
       <FlatList
         data={alarms}
         keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => (
-          <AlarmCard time={item.time} days={item.days} />
+        renderItem={({ item, index }) => (
+          <AlarmCard time={item.time} days={item.days} isActive={activeArray[index]} index={index} activeArray={activeArray} setActiveArray={setActiveArray}/>
         )}
         style={styles.flatStyle}
       />
