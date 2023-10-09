@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Icon } from "react-native-elements";
 import { Button } from "react-native-elements";
 import AlarmSettingOverlay from "../components/AlarmSettingOverlay";
 import { View, Text, StyleSheet, FlatList } from "react-native";
@@ -46,12 +47,14 @@ export default function AlarmScreen() {
         )}
         style={styles.flatStyle}
       />
-      <Button
-        title="アラーム設定"
+      <Icon
+        containerStyle={styles.fixedButton}
+        raised
+        name="plus"
+        type="material-community"
+        color="#517fa4"
         onPress={toggleOverlay}
-        containerStyle={{ marginBottom: 30 }}
       />
-
       <AlarmSettingOverlay
         visible={visible}
         toggleOverlay={toggleOverlay}
