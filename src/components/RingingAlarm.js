@@ -8,7 +8,7 @@ export default function RingingAlarm({ isAlarmRinging, setIsAlarmRinging }) {
   const sound = new Audio.Sound();
 
   async function audio() {
-    await sound.loadAsync(require("../assets/chicken_alarm.mp3"));
+    await sound.loadAsync(require("../../assets/chicken_alarm.mp3"));
     await sound.playAsync();
   }
 
