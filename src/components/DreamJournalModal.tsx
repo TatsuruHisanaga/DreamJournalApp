@@ -1,4 +1,4 @@
-// DreamJournalModal.js
+// DreamJournalModal.tsx
 import React, { useState, useEffect } from 'react';
 import {
   Modal,
@@ -17,7 +17,20 @@ import { Icon } from 'react-native-elements';
 import { Button } from 'react-native-paper';
 import { Rating } from 'react-native-elements';
 
-export default function DreamJournalModal(props) {
+interface DreamJournalModalProps {
+  handleSave: (entry: Entry) => void;
+}
+
+interface Entry {
+  title: string;
+  details: string;
+  date: Date;
+  selectedTags: string[];
+  wakeUpRating: number;
+}
+
+
+const DreamJournalModal: React.FC<DreamJournalModalProps> = (props) => {
   const [title, setTitle] = useState('');
   const [details, setDetails] = useState('');
   const [location, setLocation] = useState(null);
@@ -210,6 +223,8 @@ export default function DreamJournalModal(props) {
     </View>
   );
 }
+
+export default DreamJournalModal;
 
 const styles = StyleSheet.create({
   container: {
