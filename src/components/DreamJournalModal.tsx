@@ -43,7 +43,7 @@ const DreamJournalModal: React.FC<DreamJournalModalProps> = (props) => {
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [isInputValid, setIsInputValid] = useState(false);
 
-  const onChangeDate = (event, selectedDate) => {
+  const onChangeDate = (event: Event, selectedDate: Date | null) => {
     const currentDate = selectedDate || date;
     setShowDatePicker(false);
     setDate(currentDate);
