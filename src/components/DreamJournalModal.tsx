@@ -19,7 +19,7 @@ import { Button } from 'react-native-paper';
 import { Rating } from 'react-native-elements';
 import { Entry } from '../types/EntryTypes';
 import { callDallE2API } from '../services/OpenAIApiService';
-import CheckBox from '@react-native-community/checkbox';
+import { Checkbox } from 'react-native-paper';
 
 interface DreamJournalModalProps {
   handleSave: (entry: Entry) => Promise<void>;
@@ -199,10 +199,11 @@ const DreamJournalModal: React.FC<DreamJournalModalProps> = (props) => {
                 selectedTags={selectedTags}
                 setSelectedTags={setSelectedTags}
               />
-              <CheckBox
-                value={generateImage}
-                onValueChange={setGenerateImage}
-                style={{ alignSelf: 'center' }}
+              <Checkbox
+                status={generateImage ? 'checked' : 'unchecked'}
+                onPress={() => {
+                  setGenerateImage(!generateImage);
+                }}
               />
               <Text>画像を生成する</Text>
               <View style={styles.buttonContainer}>
