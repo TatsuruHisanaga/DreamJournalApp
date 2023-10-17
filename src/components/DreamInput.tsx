@@ -1,7 +1,16 @@
-import React, { useState } from 'react';
+// DreamInput.tsx
+import React, { useState, FC } from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 
-export default function DreamInput({ label, value, onChangeText, placeholder, multiline = false }) {
+interface DreamInputProps {
+  label: string;
+  value: string;
+  onChangeText: (text: string) => void;
+  placeholder: string;
+  multiline?: boolean;
+}
+
+const DreamInput: FC<DreamInputProps> = ({ label, value, onChangeText, placeholder, multiline = false }) => {
   const [isFocused, setIsFocused] = useState(false);
 
   return (
@@ -19,6 +28,8 @@ export default function DreamInput({ label, value, onChangeText, placeholder, mu
     </View>
   );
 }
+
+export default DreamInput;
 
 
 const styles = StyleSheet.create({
