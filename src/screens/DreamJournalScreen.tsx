@@ -1,14 +1,22 @@
-// DreamJournalScreen.js
+// DreamJournalScreen.tsx
 import React, { useState } from 'react';
-import { View,  StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import DreamJournalModal from '../components/DreamJournalModal';
 import DreamJournalContainer from '../components/DreamJournalContainer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function DreamJournalScreen() {
-  const [entries, setEntries] = useState([]);
-  // データの保存
-  const handleSave = async (entry) => {
+interface Entry {
+  title: string;
+  details: string;
+  date: Date;
+  selectedTags: string[];
+  wakeUpRating: number;
+}
+
+const DreamJournalScreen: React.FC = () => {
+  const [entries, setEntries] = useState<Entry[]>([]);
+
+  const handleSave = async (entry: Entry) => {
     const newEntries = [...entries, entry];
     setEntries(newEntries);
     await AsyncStorage.setItem('dreamJournal', JSON.stringify(newEntries));
@@ -20,7 +28,7 @@ export default function DreamJournalScreen() {
       <DreamJournalModal handleSave={handleSave} />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -32,3 +40,6 @@ const styles = StyleSheet.create({
     width: '100%',
   },
 });
+
+export default DreamJournalScreen;
+
