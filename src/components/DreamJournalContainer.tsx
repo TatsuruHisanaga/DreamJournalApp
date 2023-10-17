@@ -39,3 +39,5 @@ const DreamJournalContainer: FC<DreamJournalContainerProps> = function ({
     </ScrollView>
   );
 }
+
+export default DreamJournalContainer;
