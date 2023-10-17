@@ -1,13 +1,19 @@
 // DreamJournalContainer.js
-import React, { useEffect } from 'react';
+import React, { useEffect, FC } from 'react';
 import { ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DreamJournalCard from './DreamJournalCard';
+import { Entry } from './DreamJournalCommonCard';
 import DreamJournalSampleCard, {
   sampleEntries,
-} from '../components/DreamJournalSampleCard';
+} from './DreamJournalSampleCard';
 
-export default function DreamJournalContainer({
+interface DreamJournalContainerProps {
+  entries: Entry[];
+  setEntries: React.Dispatch<React.SetStateAction<Entry[]>>;
+}
+
+const DreamJournalContainer: FC<DreamJournalContainerProps> = function ({
   entries,
   setEntries,
 }) {
