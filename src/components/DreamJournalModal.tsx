@@ -15,17 +15,10 @@ import DateTimePicker, { Event as DateTimePickerEvent } from '@react-native-comm
 import { Icon } from 'react-native-elements';
 import { Button } from 'react-native-paper';
 import { Rating } from 'react-native-elements';
+import { Entry } from '../types/EntryTypes';
 
 interface DreamJournalModalProps {
-  handleSave: (entry: Entry) => void;
-}
-
-interface Entry {
-  title: string;
-  details: string;
-  date: Date;
-  selectedTags: string[];
-  wakeUpRating: number;
+  handleSave: (entry: Entry) => Promise<void>;
 }
 
 
