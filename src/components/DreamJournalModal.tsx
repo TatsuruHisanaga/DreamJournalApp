@@ -1,4 +1,4 @@
-// DreamJournalModal.js
+// DreamJournalModal.tsx
 import React, { useState, useEffect } from 'react';
 import {
   Modal,
@@ -11,13 +11,25 @@ import {
 import TagSelector from './TagSelector';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DreamInput from './DreamInput';
-import DreamPicker from './DreamPicker';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import DateTimePicker, { Event as DateTimePickerEvent } from '@react-native-community/datetimepicker';
 import { Icon } from 'react-native-elements';
 import { Button } from 'react-native-paper';
 import { Rating } from 'react-native-elements';
 
-export default function DreamJournalModal(props) {
+interface DreamJournalModalProps {
+  handleSave: (entry: Entry) => void;
+}
+
+interface Entry {
+  title: string;
+  details: string;
+  date: Date;
+  selectedTags: string[];
+  wakeUpRating: number;
+}
+
+
+const DreamJournalModal: React.FC<DreamJournalModalProps> = (props) => {
   const [title, setTitle] = useState('');
   const [details, setDetails] = useState('');
   const [location, setLocation] = useState(null);
@@ -25,18 +37,18 @@ export default function DreamJournalModal(props) {
   const [selectedTags, setSelectedTags] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [actions, setActions] = useState(null);
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState<Date>(new Date());
   const [dreamJournalEntries, setDreamJournalEntries] = useState([]);
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [isInputValid, setIsInputValid] = useState(false);
 
-  const onChangeDate = (event, selectedDate) => {
+  const onChangeDate = (_event: any, selectedDate?: Date) => {
     const currentDate = selectedDate || date;
     setShowDatePicker(false);
     setDate(currentDate);
-  };
+  };  
 
-  const formatDateToJapanese = (date) => {
+  const formatDateToJapanese = (date: Date) => {
     const month = date.getMonth() + 1; // 月は0から始まるため、+1が必要
     const day = date.getDate();
     const weekDay = ['日', '月', '火', '水', '木', '金', '土'][date.getDay()]; // 曜日を日本語で取得
@@ -122,7 +134,7 @@ export default function DreamJournalModal(props) {
                 style={{ marginLeft: 16 }}
                 onPress={() => setShowDatePicker(true)}
               >
-                <Text styles={styles.date}>{formatDateToJapanese(date)}</Text>
+                <Text style={styles.date}>{formatDateToJapanese(date)}</Text>
               </TouchableOpacity>
               {showDatePicker && (
                 <DateTimePicker
@@ -153,8 +165,7 @@ export default function DreamJournalModal(props) {
                 fractions={1}
                 startingValue={wakeUpRating}
                 imageSize={32}
-                onFinishRating={(value) => setWakeUpRating(value)}
-
+                onFinishRating={(value: number) => setWakeUpRating(value)}
               />
               {/* <DreamPicker
                 label="場所"
@@ -210,6 +221,8 @@ export default function DreamJournalModal(props) {
     </View>
   );
 }
+
+export default DreamJournalModal;
 
 const styles = StyleSheet.create({
   container: {
