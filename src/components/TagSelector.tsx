@@ -1,9 +1,15 @@
-// TagSelector.js
-import React from 'react';
+// TagSelector.tsx
+import React, { FC } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const tags = [
+interface Tag {
+  label: string;
+  value: string;
+  icon: string;
+}
+
+const tags: Tag[] = [
   { label: '喜び', value: 'joy', icon: 'emoticon-happy-outline' },
   { label: '期待', value: 'anticipation', icon: 'emoticon-excited-outline' },
   { label: '幸せ', value: 'happy', icon: 'emoticon-outline' },
@@ -15,8 +21,13 @@ const tags = [
   // 他のタグもここに追加
 ];
 
-export default function TagSelector({ selectedTags, setSelectedTags }) {
-  const toggleTag = (tagValue) => {
+interface TagSelectorProps {
+  selectedTags: string[];
+  setSelectedTags: React.Dispatch<React.SetStateAction<string[]>>;
+}
+
+const TagSelector: FC<TagSelectorProps> = ({ selectedTags, setSelectedTags }) => {
+  const toggleTag = (tagValue: string) => {
     if (selectedTags.includes(tagValue)) {
       setSelectedTags(selectedTags.filter((t) => t !== tagValue));
     } else {
@@ -44,7 +55,9 @@ export default function TagSelector({ selectedTags, setSelectedTags }) {
       </View>
     </View>
   );
-}
+};
+
+export default TagSelector;
 
 const styles = StyleSheet.create({
   container: {
