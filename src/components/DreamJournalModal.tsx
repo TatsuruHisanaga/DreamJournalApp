@@ -11,8 +11,7 @@ import {
 import TagSelector from './TagSelector';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DreamInput from './DreamInput';
-import DreamPicker from './DreamPicker';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import DateTimePicker, { Event as DateTimePickerEvent } from '@react-native-community/datetimepicker';
 import { Icon } from 'react-native-elements';
 import { Button } from 'react-native-paper';
 import { Rating } from 'react-native-elements';
@@ -38,18 +37,18 @@ const DreamJournalModal: React.FC<DreamJournalModalProps> = (props) => {
   const [selectedTags, setSelectedTags] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [actions, setActions] = useState(null);
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState<Date>(new Date());
   const [dreamJournalEntries, setDreamJournalEntries] = useState([]);
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [isInputValid, setIsInputValid] = useState(false);
 
-  const onChangeDate = (event: Event, selectedDate: Date | null) => {
+  const onChangeDate = (_event: any, selectedDate?: Date) => {
     const currentDate = selectedDate || date;
     setShowDatePicker(false);
     setDate(currentDate);
-  };
+  };  
 
-  const formatDateToJapanese = (date) => {
+  const formatDateToJapanese = (date: Date) => {
     const month = date.getMonth() + 1; // 月は0から始まるため、+1が必要
     const day = date.getDate();
     const weekDay = ['日', '月', '火', '水', '木', '金', '土'][date.getDay()]; // 曜日を日本語で取得
@@ -135,7 +134,7 @@ const DreamJournalModal: React.FC<DreamJournalModalProps> = (props) => {
                 style={{ marginLeft: 16 }}
                 onPress={() => setShowDatePicker(true)}
               >
-                <Text styles={styles.date}>{formatDateToJapanese(date)}</Text>
+                <Text style={styles.date}>{formatDateToJapanese(date)}</Text>
               </TouchableOpacity>
               {showDatePicker && (
                 <DateTimePicker
@@ -166,8 +165,7 @@ const DreamJournalModal: React.FC<DreamJournalModalProps> = (props) => {
                 fractions={1}
                 startingValue={wakeUpRating}
                 imageSize={32}
-                onFinishRating={(value) => setWakeUpRating(value)}
-
+                onFinishRating={(value: number) => setWakeUpRating(value)}
               />
               {/* <DreamPicker
                 label="場所"
