@@ -1,9 +1,10 @@
+// TabNavigator.js
 import React from 'react';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import HomeView from '../screens/HomeView';
+import HomeScreen from '../screens/HomeScreen';
 import DreamJournalScreen from '../screens/DreamJournalScreen';
-import RankingView from '../screens/RankingView';
+import RankingScreen from '../screens/RankingScreen';
 import AlarmScreen from '../screens/AlarmScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 
@@ -14,7 +15,7 @@ function TabNavigator() {
     <Tab.Navigator initialRouteName="ホーム">
       <Tab.Screen
         name="ホーム"
-        component={HomeView}
+        component={HomeScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
@@ -49,7 +50,7 @@ function TabNavigator() {
       />
       <Tab.Screen
         name="統計"
-        component={RankingView}
+        component={RankingScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
