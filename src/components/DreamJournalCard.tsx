@@ -1,10 +1,11 @@
 // DreamJournalCard.tsx
 // DreamJournalCard.tsx
 import React from 'react';
-import DreamJournalCommonCard, { Entry as CommonEntry } from './DreamJournalCommonCard';
+import DreamJournalCommonCard from './DreamJournalCommonCard';
+import { Entry } from '../types//EntryTypes';
 
 interface DreamJournalCardProps {
-  entry: CommonEntry;
+  entry: Entry;
 }
 
 const DreamJournalCard: React.FC<DreamJournalCardProps> = ({ entry }) => {

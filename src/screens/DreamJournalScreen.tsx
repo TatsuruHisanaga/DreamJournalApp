@@ -4,14 +4,7 @@ import { View, StyleSheet } from 'react-native';
 import DreamJournalModal from '../components/DreamJournalModal';
 import DreamJournalContainer from '../components/DreamJournalContainer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-interface Entry {
-  title: string;
-  details: string;
-  date: Date;
-  selectedTags: string[];
-  wakeUpRating: number;
-}
+import { Entry } from '../types//EntryTypes';
 
 const DreamJournalScreen: React.FC = () => {
   const [entries, setEntries] = useState<Entry[]>([]);

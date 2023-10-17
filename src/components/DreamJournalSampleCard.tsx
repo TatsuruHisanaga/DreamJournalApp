@@ -1,7 +1,8 @@
 // DreamJournalSampleCard.js
 import React, { FC } from 'react';
 import DreamJournalCommonCard from './DreamJournalCommonCard';
-import { Entry, Tag } from './DreamJournalCommonCard'
+import { Tag } from './DreamJournalCommonCard'
+import { Entry } from '../types//EntryTypes';
 
 interface DreamJournalSampleCardProps {
   entry: Entry;

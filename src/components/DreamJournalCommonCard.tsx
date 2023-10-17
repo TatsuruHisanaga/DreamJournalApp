@@ -3,22 +3,13 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, StyleProp, ViewStyle } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Surface } from 'react-native-paper';
+import { Entry } from '../types/EntryTypes';
 
 export interface Tag {
   label: string;
   value: string;
   icon: string;
   color: string;
-}
-
-export interface Entry {
-  id?: string;
-  title: string;
-  details: string;
-  date: string;
-  wakeUpRating?: number;
-  dreamImage?: string;
-  selectedTags?: string[];
 }
 
 interface DreamJournalCommonCardProps {

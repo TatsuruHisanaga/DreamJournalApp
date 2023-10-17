@@ -3,7 +3,7 @@ import React, { useEffect, FC } from 'react';
 import { ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DreamJournalCard from './DreamJournalCard';
-import { Entry } from './DreamJournalCommonCard';
+import { Entry } from '../types//EntryTypes';
 import DreamJournalSampleCard, {
   sampleEntries,
 } from './DreamJournalSampleCard';
