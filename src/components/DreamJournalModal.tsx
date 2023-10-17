@@ -34,7 +34,7 @@ const DreamJournalModal: React.FC<DreamJournalModalProps> = (props) => {
   const [details, setDetails] = useState('');
   const [location, setLocation] = useState(null);
   const [characters, setCharacters] = useState(null);
-  const [selectedTags, setSelectedTags] = useState([]);
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [actions, setActions] = useState(null);
   const [date, setDate] = useState<Date>(new Date());
