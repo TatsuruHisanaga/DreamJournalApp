@@ -1,6 +1,13 @@
 // DreamJournalCommonCard.tsx
 import React from 'react';
-import { View, Text, StyleSheet, Image, StyleProp, ViewStyle } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  StyleProp,
+  ViewStyle,
+} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Surface } from 'react-native-paper';
 import { Entry } from '../types/EntryTypes';
@@ -17,8 +24,11 @@ interface DreamJournalCommonCardProps {
   tags?: Tag[];
 }
 
-const DreamJournalCommonCard: React.FC<DreamJournalCommonCardProps> = ({ entry, tags }) => {
-  function formatDate(dateString: string, fallbackDate: string): string {
+const DreamJournalCommonCard: React.FC<DreamJournalCommonCardProps> = ({
+  entry,
+  tags,
+}) => {
+  function formatDate(dateString: string | Date, fallbackDate: string): string {
     try {
       const date = new Date(dateString);
       if (isNaN(date.getTime())) {
@@ -26,14 +36,18 @@ const DreamJournalCommonCard: React.FC<DreamJournalCommonCardProps> = ({ entry, 
       }
       const day = date.getDate();
       const month = date.getMonth() + 1;
-      const dayOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][date.getDay()];
+      const dayOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][
+        date.getDay()
+      ];
       return `${dayOfWeek} ${month}/${day}`;
     } catch (e) {
       return fallbackDate;
     }
   }
 
-  const getTagIconAndLabel = (value: string): { icon: string; label: string; color: string } | null => {
+  const getTagIconAndLabel = (
+    value: string
+  ): { icon: string; label: string; color: string } | null => {
     if (!tags) return null;
     const tag = tags.find((t) => t.value === value);
     return tag ? { icon: tag.icon, label: tag.label, color: tag.color } : null;
@@ -52,11 +66,11 @@ const DreamJournalCommonCard: React.FC<DreamJournalCommonCardProps> = ({ entry, 
 
   return (
     <Surface style={styles.card as StyleProp<ViewStyle>} elevation={1}>
-        {entry.dreamImage && (
-          <Image source={{ uri: entry.dreamImage }} style={styles.dreamImage} />
-        )}
+      {entry.dreamImage && (
+        <Image source={{ uri: entry.dreamImage }} style={styles.dreamImage} />
+      )}
       <View style={styles.header}>
-        <Text style={styles.date}>{formatDate(entry.date, entry.date)}</Text>
+        <Text style={styles.date}>{formatDate(entry.date, 'N/A')}</Text>
         <Text style={styles.name}></Text>
       </View>
       <Text style={styles.title}>{entry.title}</Text>
@@ -68,8 +82,9 @@ const DreamJournalCommonCard: React.FC<DreamJournalCommonCardProps> = ({ entry, 
               style={[
                 styles.ratingDot,
                 {
-                  backgroundColor: i <= entry.wakeUpRating! ? ratingBarColor : '#ccc',
-                }
+                  backgroundColor:
+                    i <= entry.wakeUpRating! ? ratingBarColor : '#ccc',
+                },
               ]}
             />
           ))}
@@ -81,7 +96,10 @@ const DreamJournalCommonCard: React.FC<DreamJournalCommonCardProps> = ({ entry, 
           entry.selectedTags.map((tagValue, index) => {
             const tagInfo = getTagIconAndLabel(tagValue);
             return tagInfo ? (
-              <View key={index} style={[styles.tag, { backgroundColor: tagInfo.color }]}>
+              <View
+                key={index}
+                style={[styles.tag, { backgroundColor: tagInfo.color }]}
+              >
                 <MaterialCommunityIcons name={tagInfo.icon} size={18} />
                 <Text style={styles.tagLabel}>{tagInfo.label}</Text>
               </View>
