@@ -25,7 +25,7 @@ class UnknownError extends Error {
 
 export const callDallE2API = async (title: string, details: string): Promise<string | null> => {
   try {
-    const prompt = `${title}. ${details}`;
+    const prompt = `${title}`;
     const dalleUrl = 'https://api.openai.com/v1/images/generations';
 
     const response = await axios.post<ImageResponse>(
