@@ -8,6 +8,21 @@ interface ImageResponse {
   }[];
 }
 
+// カスタムエラークラスの定義
+class DallEAPIError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = 'DallEAPIError';
+  }
+}
+
+class UnknownError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = 'UnknownError';
+  }
+}
+
 export const callDallE2API = async (title: string, details: string): Promise<string | null> => {
   try {
     const prompt = `${title}. ${details}`;
@@ -31,8 +46,13 @@ export const callDallE2API = async (title: string, details: string): Promise<str
     const imageUrl = response.data.data[0].url;
     return imageUrl;
   } catch (error) {
-    console.error("Error calling DALL-E2 API:", error);
-    return null;
+    if (axios.isAxiosError(error)) {
+      console.error("API responded with an error:", error.response?.data);
+      throw new DallEAPIError(`API Error: ${error.response?.data}`);
+    } else {
+      console.error("An unknown error occurred:", error);
+      throw new UnknownError("An unknown error occurred");
+    }
   }
 };
 
