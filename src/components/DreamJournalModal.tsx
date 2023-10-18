@@ -18,7 +18,7 @@ import { Icon } from 'react-native-elements';
 import { Button } from 'react-native-paper';
 import { Rating } from 'react-native-elements';
 import { Entry } from '../types/EntryTypes';
-import { callDallE2API } from '../services/OpenAIApiService';
+import { callDallE2API } from '../services/DallE';
 import { Checkbox } from 'react-native-paper';
 
 interface DreamJournalModalProps {
