@@ -28,11 +28,8 @@ interface DreamJournalModalProps {
 const DreamJournalModal: React.FC<DreamJournalModalProps> = (props) => {
   const [title, setTitle] = useState('');
   const [details, setDetails] = useState('');
-  const [location, setLocation] = useState(null);
-  const [characters, setCharacters] = useState(null);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [modalVisible, setModalVisible] = useState(false);
-  const [actions, setActions] = useState(null);
   const [date, setDate] = useState<Date>(new Date());
   const [dreamJournalEntries, setDreamJournalEntries] = useState([]);
   const [showDatePicker, setShowDatePicker] = useState(false);
@@ -72,8 +69,7 @@ const DreamJournalModal: React.FC<DreamJournalModalProps> = (props) => {
 
   const fetchDallEImage = async () => {
     if (generateImage) {
-      // DALL-E2 APIを呼び出して画像を生成（仮定）
-      const imageUrl = await callDallE2API(title, details); // この関数は自分で定義する必要があります
+      const imageUrl = await callDallE2API(title, details);
       setDreamImage(imageUrl);
     }
   };
@@ -177,24 +173,6 @@ const DreamJournalModal: React.FC<DreamJournalModalProps> = (props) => {
                 imageSize={32}
                 onFinishRating={(value: number) => setWakeUpRating(value)}
               />
-              {/* <DreamPicker
-                label="場所"
-                items={['自宅', '学校', '仕事場', '未知の場所']}
-                selectedValue={location}
-                onValueChange={setLocation}
-              />
-              <DreamPicker
-                label="登場人物"
-                items={['家族', '友達', '有名人', '自分自身']}
-                selectedValue={characters}
-                onValueChange={setCharacters}
-              />
-              <DreamPicker
-                label="アクション"
-                items={['走る', '飛ぶ', '話す', '戦う']}
-                selectedValue={actions}
-                onValueChange={setActions}
-              /> */}
               <TagSelector
                 selectedTags={selectedTags}
                 setSelectedTags={setSelectedTags}
