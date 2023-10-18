@@ -1,5 +1,4 @@
 // DreamJournalCard.tsx
-// DreamJournalCard.tsx
 import React from 'react';
 import DreamJournalCommonCard from './DreamJournalCommonCard';
 import { Entry } from '../types//EntryTypes';

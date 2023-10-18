@@ -5,6 +5,6 @@ export interface Entry {
   details: string;
   date: string | Date;
   wakeUpRating?: number;
-  dreamImage?: string;
+  dreamImage?: string | null;
   selectedTags?: string[];
 }

@@ -11,35 +11,37 @@ import {
 import TagSelector from './TagSelector';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DreamInput from './DreamInput';
-import DateTimePicker, { Event as DateTimePickerEvent } from '@react-native-community/datetimepicker';
+import DateTimePicker, {
+  Event as DateTimePickerEvent,
+} from '@react-native-community/datetimepicker';
 import { Icon } from 'react-native-elements';
 import { Button } from 'react-native-paper';
 import { Rating } from 'react-native-elements';
 import { Entry } from '../types/EntryTypes';
+import { callDallE2API } from '../services/DallE';
+import { Checkbox } from 'react-native-paper';
 
 interface DreamJournalModalProps {
   handleSave: (entry: Entry) => Promise<void>;
 }
 
-
 const DreamJournalModal: React.FC<DreamJournalModalProps> = (props) => {
   const [title, setTitle] = useState('');
   const [details, setDetails] = useState('');
-  const [location, setLocation] = useState(null);
-  const [characters, setCharacters] = useState(null);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [modalVisible, setModalVisible] = useState(false);
-  const [actions, setActions] = useState(null);
   const [date, setDate] = useState<Date>(new Date());
   const [dreamJournalEntries, setDreamJournalEntries] = useState([]);
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [isInputValid, setIsInputValid] = useState(false);
+  const [generateImage, setGenerateImage] = useState(false); // 画像生成オプション
+  const [dreamImage, setDreamImage] = useState<string | null>(null); // 生成された画像のURL
 
   const onChangeDate = (_event: any, selectedDate?: Date) => {
     const currentDate = selectedDate || date;
     setShowDatePicker(false);
     setDate(currentDate);
-  };  
+  };
 
   const formatDateToJapanese = (date: Date) => {
     const month = date.getMonth() + 1; // 月は0から始まるため、+1が必要
@@ -65,14 +67,25 @@ const DreamJournalModal: React.FC<DreamJournalModalProps> = (props) => {
     }
   };
 
+  const fetchDallEImage = async () => {
+    if (generateImage) {
+      const imageUrl = await callDallE2API(title, details);
+      setDreamImage(imageUrl);
+    }
+  };
+
   const handleSaveButton = async () => {
+    await fetchDallEImage();
+
     const entry = {
       title: title,
       details: details,
       date: date,
       selectedTags: selectedTags,
       wakeUpRating: wakeUpRating,
+      dreamImage: dreamImage,
     };
+
     await props.handleSave(entry);
     setModalVisible(false);
   };
@@ -153,35 +166,26 @@ const DreamJournalModal: React.FC<DreamJournalModalProps> = (props) => {
               <Text style={styles.label}>寝起きの良さ</Text>
               <Rating
                 showRating
-                jumpValue	={1.0}
+                jumpValue={1.0}
                 type="star"
                 fractions={1}
                 startingValue={wakeUpRating}
                 imageSize={32}
                 onFinishRating={(value: number) => setWakeUpRating(value)}
               />
-              {/* <DreamPicker
-                label="場所"
-                items={['自宅', '学校', '仕事場', '未知の場所']}
-                selectedValue={location}
-                onValueChange={setLocation}
-              />
-              <DreamPicker
-                label="登場人物"
-                items={['家族', '友達', '有名人', '自分自身']}
-                selectedValue={characters}
-                onValueChange={setCharacters}
-              />
-              <DreamPicker
-                label="アクション"
-                items={['走る', '飛ぶ', '話す', '戦う']}
-                selectedValue={actions}
-                onValueChange={setActions}
-              /> */}
               <TagSelector
                 selectedTags={selectedTags}
                 setSelectedTags={setSelectedTags}
               />
+              <View style={styles.checkboxContainer}>
+                <Text>画像を生成する</Text>
+                <Checkbox
+                  status={generateImage ? 'checked' : 'unchecked'}
+                  onPress={() => {
+                    setGenerateImage(!generateImage);
+                  }}
+                />
+              </View>
               <View style={styles.buttonContainer}>
                 <Button
                   mode="contained"
@@ -213,7 +217,7 @@ const DreamJournalModal: React.FC<DreamJournalModalProps> = (props) => {
       />
     </View>
   );
-}
+};
 
 export default DreamJournalModal;
 
@@ -276,11 +280,15 @@ const styles = StyleSheet.create({
   },
   date: {
     fontSize: 18,
-    marginLeft: 32,
   },
   fixedButton: {
     position: 'absolute',
     bottom: -12,
+  },
+  checkboxContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center', 
   },
   buttonContainer: {
     alignItems: 'center',
