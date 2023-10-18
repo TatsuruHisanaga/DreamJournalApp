@@ -1,5 +1,6 @@
-// services/openAIApiService.ts
-import { OpenAI, ClientOptions } from 'openai';
+// services/DallE.ts
+import { OPENAI_API_KEY } from '@env';
+
 
 interface ImageResponse {
   data: {
@@ -7,22 +8,25 @@ interface ImageResponse {
   }[];
 }
 
-const options: ClientOptions = {
-  apiKey: process.env.OPENAI_API_KEY || "YOUR_OPENAI_API_KEY"
-};
-
 export const callDallE2API = async (title: string, details: string): Promise<string | null> => {
   try {
     const prompt = `${title}. ${details}`;
-    const openai = new OpenAI(options);
+    const dalleUrl = 'https://api.openai.com/v1/images/generations';
+    const response = await fetch(dalleUrl, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${OPENAI_API_KEY || "YOUR_OPENAI_API_KEY"}`
+      },
+      body: JSON.stringify({
+        prompt: prompt,
+        n: 1,
+        size: "512x512"
+      })
+    });
 
-    const response = await openai.images.generate({
-      prompt: prompt,
-      n: 1,
-      size: "512x512"
-    }) as unknown as ImageResponse;
-
-    const imageUrl = response.data[0].url;
+    const json: ImageResponse = await response.json();
+    const imageUrl = json.data[0].url;
     return imageUrl;
   } catch (error) {
     console.error("Error calling DALL-E2 API:", error);
