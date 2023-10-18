@@ -177,13 +177,15 @@ const DreamJournalModal: React.FC<DreamJournalModalProps> = (props) => {
                 selectedTags={selectedTags}
                 setSelectedTags={setSelectedTags}
               />
-              <Checkbox
-                status={generateImage ? 'checked' : 'unchecked'}
-                onPress={() => {
-                  setGenerateImage(!generateImage);
-                }}
-              />
-              <Text>画像を生成する</Text>
+              <View style={styles.checkboxContainer}>
+                <Text>画像を生成する</Text>
+                <Checkbox
+                  status={generateImage ? 'checked' : 'unchecked'}
+                  onPress={() => {
+                    setGenerateImage(!generateImage);
+                  }}
+                />
+              </View>
               <View style={styles.buttonContainer}>
                 <Button
                   mode="contained"
@@ -278,11 +280,15 @@ const styles = StyleSheet.create({
   },
   date: {
     fontSize: 18,
-    marginLeft: 32,
   },
   fixedButton: {
     position: 'absolute',
     bottom: -12,
+  },
+  checkboxContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center', 
   },
   buttonContainer: {
     alignItems: 'center',
