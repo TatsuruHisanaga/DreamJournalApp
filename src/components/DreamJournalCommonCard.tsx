@@ -1,5 +1,5 @@
 // DreamJournalCommonCard.tsx
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -11,6 +11,9 @@ import {
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Surface } from 'react-native-paper';
 import { Entry } from '../types/EntryTypes';
+import SkeletonPlaceholder from "react-native-skeleton-placeholder";
+import { LinearGradient } from 'expo-linear-gradient';
+
 
 export interface Tag {
   label: string;
@@ -64,10 +67,25 @@ const DreamJournalCommonCard: React.FC<DreamJournalCommonCardProps> = ({
     }
   }
 
+  const [isImageLoading, setIsImageLoading] = useState(true); 
+
+
   return (
     <Surface style={styles.card as StyleProp<ViewStyle>} elevation={1}>
+      {isImageLoading ? (
+        <SkeletonPlaceholder>
+          <SkeletonPlaceholder.Item
+            height={200}
+            borderRadius={10}
+          />
+        </SkeletonPlaceholder>
+      ) : null}
       {entry.dreamImage && (
-        <Image source={{ uri: entry.dreamImage }} style={styles.dreamImage} />
+        <Image
+          source={{ uri: entry.dreamImage }}
+          style={styles.dreamImage}
+          onLoadEnd={() => setIsImageLoading(false)} 
+        />
       )}
       <View style={styles.header}>
         <Text style={styles.date}>{formatDate(entry.date, 'N/A')}</Text>
