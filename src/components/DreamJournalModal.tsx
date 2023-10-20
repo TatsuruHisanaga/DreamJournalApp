@@ -68,26 +68,35 @@ const DreamJournalModal: React.FC<DreamJournalModalProps> = (props) => {
   };
 
   const fetchDallEImage = async () => {
-    if (generateImage) {
-      const imageUrl = await callDallE2API(title, details);
-      setDreamImage(imageUrl);
-    }
+    const imageUrl = await callDallE2API(title, details);
+    return imageUrl;  // imageUrlを返す
   };
 
-  const handleSaveButton = async () => {
-    await fetchDallEImage();
-
+  const handleSaveButton = () => {
+    // モーダルを閉じる
+    setModalVisible(false);
+  
+    // エントリの基本データを保存
     const entry = {
       title: title,
       details: details,
       date: date,
       selectedTags: selectedTags,
       wakeUpRating: wakeUpRating,
-      dreamImage: dreamImage,
+      dreamImage: null, // 最初はnullを設定
     };
-
-    await props.handleSave(entry);
-    setModalVisible(false);
+  
+    // まずは画像なしで保存
+    props.handleSave(entry);
+  
+    // 非同期でDall-E APIから画像を取得
+    if (generateImage) {
+      fetchDallEImage().then((imageUrl) => {
+        // 取得した画像URLでエントリを更新
+        const updatedEntry = { ...entry, dreamImage: imageUrl };
+        props.handleSave(updatedEntry);  // 再度保存
+      });
+    }
   };
 
   const [wakeUpRating, setWakeUpRating] = useState(3);
