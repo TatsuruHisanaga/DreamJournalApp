@@ -32,7 +32,7 @@ const RankingList = ({ data, userData }) => {
       renderItem={({ item, index }) => (
         <View style={[styles.listItem, switchBgColor(item.id), rankStyle(index)]}>
           <Text style={styles.rank}>{index + 1}</Text>
-          <Image source={item.avatarURL ? { uri: item.avatarURL } : require('../assets/default_avatar.png')} style={styles.avatar} />
+          <Image source={item.avatarURL ? { uri: item.avatarURL } : require('../../assets/default_avatar.png')} style={styles.avatar} />
           <Text style={styles.name}>{item.name}</Text>
           <Text style={styles.score}>{item.time}s</Text>
         </View>

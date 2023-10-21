@@ -1,4 +1,4 @@
-// DreamJournalModal.js
+// DreamJournalModal.tsx
 import React, { useState, useEffect } from 'react';
 import {
   Modal,
@@ -11,32 +11,39 @@ import {
 import TagSelector from './TagSelector';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DreamInput from './DreamInput';
-import DreamPicker from './DreamPicker';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import DateTimePicker, {
+  Event as DateTimePickerEvent,
+} from '@react-native-community/datetimepicker';
 import { Icon } from 'react-native-elements';
 import { Button } from 'react-native-paper';
 import { Rating } from 'react-native-elements';
+import { Entry } from '../types/EntryTypes';
+import { callDallE2API } from '../services/DallE';
+import { Checkbox } from 'react-native-paper';
 
-export default function DreamJournalModal(props) {
+interface DreamJournalModalProps {
+  handleSave: (entry: Entry) => Promise<void>;
+}
+
+const DreamJournalModal: React.FC<DreamJournalModalProps> = (props) => {
   const [title, setTitle] = useState('');
   const [details, setDetails] = useState('');
-  const [location, setLocation] = useState(null);
-  const [characters, setCharacters] = useState(null);
-  const [selectedTags, setSelectedTags] = useState([]);
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [modalVisible, setModalVisible] = useState(false);
-  const [actions, setActions] = useState(null);
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState<Date>(new Date());
   const [dreamJournalEntries, setDreamJournalEntries] = useState([]);
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [isInputValid, setIsInputValid] = useState(false);
+  const [generateImage, setGenerateImage] = useState(false); // 画像生成オプション
+  const [dreamImage, setDreamImage] = useState<string | null>(null); // 生成された画像のURL
 
-  const onChangeDate = (event, selectedDate) => {
+  const onChangeDate = (_event: any, selectedDate?: Date) => {
     const currentDate = selectedDate || date;
     setShowDatePicker(false);
     setDate(currentDate);
   };
 
-  const formatDateToJapanese = (date) => {
+  const formatDateToJapanese = (date: Date) => {
     const month = date.getMonth() + 1; // 月は0から始まるため、+1が必要
     const day = date.getDate();
     const weekDay = ['日', '月', '火', '水', '木', '金', '土'][date.getDay()]; // 曜日を日本語で取得
@@ -60,16 +67,36 @@ export default function DreamJournalModal(props) {
     }
   };
 
-  const handleSaveButton = async () => {
+  const fetchDallEImage = async () => {
+    const imageUrl = await callDallE2API(title, details);
+    return imageUrl;  // imageUrlを返す
+  };
+
+  const handleSaveButton = () => {
+    // モーダルを閉じる
+    setModalVisible(false);
+  
+    // エントリの基本データを保存
     const entry = {
       title: title,
       details: details,
       date: date,
       selectedTags: selectedTags,
       wakeUpRating: wakeUpRating,
+      dreamImage: null, // 最初はnullを設定
     };
-    await props.handleSave(entry);
-    setModalVisible(false);
+  
+    // まずは画像なしで保存
+    props.handleSave(entry);
+  
+    // 非同期でDall-E APIから画像を取得
+    if (generateImage) {
+      fetchDallEImage().then((imageUrl) => {
+        // 取得した画像URLでエントリを更新
+        const updatedEntry = { ...entry, dreamImage: imageUrl };
+        props.handleSave(updatedEntry);  // 再度保存
+      });
+    }
   };
 
   const [wakeUpRating, setWakeUpRating] = useState(3);
@@ -122,7 +149,7 @@ export default function DreamJournalModal(props) {
                 style={{ marginLeft: 16 }}
                 onPress={() => setShowDatePicker(true)}
               >
-                <Text styles={styles.date}>{formatDateToJapanese(date)}</Text>
+                <Text style={styles.date}>{formatDateToJapanese(date)}</Text>
               </TouchableOpacity>
               {showDatePicker && (
                 <DateTimePicker
@@ -148,36 +175,26 @@ export default function DreamJournalModal(props) {
               <Text style={styles.label}>寝起きの良さ</Text>
               <Rating
                 showRating
-                jumpValue	={1.0}
+                jumpValue={1.0}
                 type="star"
                 fractions={1}
                 startingValue={wakeUpRating}
                 imageSize={32}
-                onFinishRating={(value) => setWakeUpRating(value)}
-
+                onFinishRating={(value: number) => setWakeUpRating(value)}
               />
-              {/* <DreamPicker
-                label="場所"
-                items={['自宅', '学校', '仕事場', '未知の場所']}
-                selectedValue={location}
-                onValueChange={setLocation}
-              />
-              <DreamPicker
-                label="登場人物"
-                items={['家族', '友達', '有名人', '自分自身']}
-                selectedValue={characters}
-                onValueChange={setCharacters}
-              />
-              <DreamPicker
-                label="アクション"
-                items={['走る', '飛ぶ', '話す', '戦う']}
-                selectedValue={actions}
-                onValueChange={setActions}
-              /> */}
               <TagSelector
                 selectedTags={selectedTags}
                 setSelectedTags={setSelectedTags}
               />
+              <View style={styles.checkboxContainer}>
+                <Text>画像を生成する</Text>
+                <Checkbox
+                  status={generateImage ? 'checked' : 'unchecked'}
+                  onPress={() => {
+                    setGenerateImage(!generateImage);
+                  }}
+                />
+              </View>
               <View style={styles.buttonContainer}>
                 <Button
                   mode="contained"
@@ -209,7 +226,9 @@ export default function DreamJournalModal(props) {
       />
     </View>
   );
-}
+};
+
+export default DreamJournalModal;
 
 const styles = StyleSheet.create({
   container: {
@@ -270,11 +289,15 @@ const styles = StyleSheet.create({
   },
   date: {
     fontSize: 18,
-    marginLeft: 32,
   },
   fixedButton: {
     position: 'absolute',
     bottom: -12,
+  },
+  checkboxContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center', 
   },
   buttonContainer: {
     alignItems: 'center',

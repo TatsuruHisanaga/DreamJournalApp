@@ -1,18 +1,41 @@
-// DreamJournalCommonCard.js
+// DreamJournalCommonCard.tsx
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  StyleProp,
+  ViewStyle,
+} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Surface } from 'react-native-paper';
+import { Entry } from '../types/EntryTypes';
 
-export default function DreamJournalCommonCard({ entry, tags }) {
-  function formatDate(dateString, fallbackDate) {
+export interface Tag {
+  label: string;
+  value: string;
+  icon: string;
+  color: string;
+}
+
+interface DreamJournalCommonCardProps {
+  entry: Entry;
+  tags?: Tag[];
+}
+
+const DreamJournalCommonCard: React.FC<DreamJournalCommonCardProps> = ({
+  entry,
+  tags,
+}) => {
+  function formatDate(dateString: string | Date, fallbackDate: string): string {
     try {
       const date = new Date(dateString);
       if (isNaN(date.getTime())) {
         return fallbackDate;
       }
       const day = date.getDate();
-      const month = date.getMonth() + 1; // 月は0から始まるため、+1が必要
+      const month = date.getMonth() + 1;
       const dayOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][
         date.getDay()
       ];
@@ -22,34 +45,36 @@ export default function DreamJournalCommonCard({ entry, tags }) {
     }
   }
 
-  // タグのアイコンとラベルをマッピングする関数
-  const getTagIconAndLabel = (value) => {
+  const getTagIconAndLabel = (
+    value: string
+  ): { icon: string; label: string; color: string } | null => {
+    if (!tags) return null;
     const tag = tags.find((t) => t.value === value);
     return tag ? { icon: tag.icon, label: tag.label, color: tag.color } : null;
   };
 
-  let ratingBarColor;
-  if (entry.wakeUpRating >= 4) {
-    ratingBarColor = 'limegreen';
-  } else if (entry.wakeUpRating === 3) {
-    ratingBarColor = 'orange';
-  } else {
-    ratingBarColor = 'red';
+  let ratingBarColor: string = '';
+  if (typeof entry.wakeUpRating === 'number') {
+    if (entry.wakeUpRating >= 4) {
+      ratingBarColor = 'limegreen';
+    } else if (entry.wakeUpRating === 3) {
+      ratingBarColor = 'orange';
+    } else {
+      ratingBarColor = 'red';
+    }
   }
 
   return (
-    <Surface style={styles.card} elevation={1}>
-      <View style={styles.imageWrapper}>
-        {entry.dreamImage && (
-          <Image source={{ uri: entry.dreamImage }} style={styles.dreamImage} />
-        )}
-      </View>
+    <Surface style={styles.card as StyleProp<ViewStyle>} elevation={1}>
+      {entry.dreamImage && (
+        <Image source={{ uri: entry.dreamImage }} style={styles.dreamImage} />
+      )}
       <View style={styles.header}>
-        <Text style={styles.date}>{formatDate(entry.date, entry.date)}</Text>
-        <Text style={styles.name}>{/* {entry.name} */}</Text>
+        <Text style={styles.date}>{formatDate(entry.date, 'N/A')}</Text>
+        <Text style={styles.name}></Text>
       </View>
       <Text style={styles.title}>{entry.title}</Text>
-      {entry.wakeUpRating && (
+      {entry.wakeUpRating !== undefined && (
         <View style={styles.ratingBarContainer}>
           {[1, 2, 3, 4, 5].map((i) => (
             <View
@@ -58,7 +83,7 @@ export default function DreamJournalCommonCard({ entry, tags }) {
                 styles.ratingDot,
                 {
                   backgroundColor:
-                    i <= entry.wakeUpRating ? ratingBarColor : '#ccc',
+                    i <= entry.wakeUpRating! ? ratingBarColor : '#ccc',
                 },
               ]}
             />
@@ -70,7 +95,7 @@ export default function DreamJournalCommonCard({ entry, tags }) {
         {entry.selectedTags &&
           entry.selectedTags.map((tagValue, index) => {
             const tagInfo = getTagIconAndLabel(tagValue);
-            return (
+            return tagInfo ? (
               <View
                 key={index}
                 style={[styles.tag, { backgroundColor: tagInfo.color }]}
@@ -78,12 +103,14 @@ export default function DreamJournalCommonCard({ entry, tags }) {
                 <MaterialCommunityIcons name={tagInfo.icon} size={18} />
                 <Text style={styles.tagLabel}>{tagInfo.label}</Text>
               </View>
-            );
+            ) : null;
           })}
       </View>
     </Surface>
   );
-}
+};
+
+export default DreamJournalCommonCard;
 
 const styles = StyleSheet.create({
   card: {

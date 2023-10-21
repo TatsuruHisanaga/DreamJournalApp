@@ -1,7 +1,14 @@
 // DreamJournalSampleCard.js
+import React, { FC } from 'react';
 import DreamJournalCommonCard from './DreamJournalCommonCard';
+import { Tag } from './DreamJournalCommonCard'
+import { Entry } from '../types//EntryTypes';
 
-export const sampleEntries = [
+interface DreamJournalSampleCardProps {
+  entry: Entry;
+}
+
+export const sampleEntries: Entry[] = [
   {
     dreamImage: 'https://images.unsplash.com/photo-1537186121022-6b14d84aafea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2669&q=80',
     date: 'Sat 9/23',
@@ -52,7 +59,7 @@ export const sampleEntries = [
   },
 ];
 
-const tags = [
+const tags: Tag[] = [
   {
     label: '喜び',
     value: 'joy',
@@ -103,6 +110,8 @@ const tags = [
   },
 ];
 
-export default function DreamJournalSampleCard({ entry }) {
+const DreamJournalSampleCard: FC<DreamJournalSampleCardProps> = ({ entry }) => {
   return <DreamJournalCommonCard entry={entry} tags={tags} />;
-}
+};
+
+export default DreamJournalSampleCard;
