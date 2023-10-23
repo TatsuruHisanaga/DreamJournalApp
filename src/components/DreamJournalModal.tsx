@@ -170,7 +170,7 @@ const DreamJournalModal: React.FC<DreamJournalModalProps> = (props) => {
                 value={details}
                 onChangeText={setDetails}
                 multiline
-                placeholder="例）マクドでハンバーガーを100個食べたら、お腹が痛くなった。急いでトイレに行ったら、そこには得体の知れないドラゴンがいて、私を食べようと追いかけまわしてきた。"
+                placeholder="例）家でひたすらハンバーガーを食べた"
               />
               <Text style={styles.label}>寝起きの良さ</Text>
               <Rating
