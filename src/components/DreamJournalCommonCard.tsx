@@ -9,7 +9,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Surface } from 'react-native-paper';
+import { Surface, Button } from 'react-native-paper';
 import { Entry } from '../types/EntryTypes';
 
 export interface Tag {
@@ -22,11 +22,14 @@ export interface Tag {
 interface DreamJournalCommonCardProps {
   entry: Entry;
   tags?: Tag[];
+  onPress: (entry: Entry) => void;
+  onUpdate: () => void;
 }
 
 const DreamJournalCommonCard: React.FC<DreamJournalCommonCardProps> = ({
   entry,
   tags,
+  onUpdate,
 }) => {
   function formatDate(dateString: string | Date, fallbackDate: string): string {
     try {
@@ -71,6 +74,7 @@ const DreamJournalCommonCard: React.FC<DreamJournalCommonCardProps> = ({
       )}
       <View style={styles.header}>
         <Text style={styles.date}>{formatDate(entry.date, 'N/A')}</Text>
+        <Button onPress={onUpdate}>更新</Button> {/* 更新ボタンを追加 */}
         <Text style={styles.name}></Text>
       </View>
       <Text style={styles.title}>{entry.title}</Text>
