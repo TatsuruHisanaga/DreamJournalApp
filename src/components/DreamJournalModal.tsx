@@ -23,9 +23,10 @@ import { Checkbox } from 'react-native-paper';
 
 interface DreamJournalModalProps {
   handleSave: (entry: Entry) => Promise<void>;
+  selectedEntry: Entry | null;
 }
 
-const DreamJournalModal: React.FC<DreamJournalModalProps> = (props) => {
+const DreamJournalModal: React.FC<DreamJournalModalProps> = (props, { selectedEntry }) => {
   const [title, setTitle] = useState('');
   const [details, setDetails] = useState('');
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
@@ -130,6 +131,17 @@ const DreamJournalModal: React.FC<DreamJournalModalProps> = (props) => {
   useEffect(() => {
     validateInput();
   }, [title, details, date]);
+
+    // 選択したエントリが変更されたときに、そのエントリのデータを設定する
+    useEffect(() => {
+      if (selectedEntry) {
+        setTitle(selectedEntry.title);
+        setDetails(selectedEntry.details);
+        setSelectedTags(selectedEntry.selectedTags);
+        setDate(selectedEntry.date);
+        // 他の状態も同様に設定する
+      }
+    }, [selectedEntry]);
 
   return (
     <View style={styles.container}>
