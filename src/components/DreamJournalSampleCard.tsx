@@ -6,6 +6,8 @@ import { Entry } from '../types//EntryTypes';
 
 interface DreamJournalSampleCardProps {
   entry: Entry;
+  onUpdate: (entry: Entry) => void;
+  onPress: (entry: Entry) => void;
 }
 
 export const sampleEntries: Entry[] = [
@@ -110,8 +112,8 @@ const tags: Tag[] = [
   },
 ];
 
-const DreamJournalSampleCard: FC<DreamJournalSampleCardProps> = ({ entry }) => {
-  return <DreamJournalCommonCard entry={entry} tags={tags} />;
+const DreamJournalSampleCard: FC<DreamJournalSampleCardProps> = ({ entry, onPress, onUpdate }) => {
+  return <DreamJournalCommonCard entry={entry} onPress={() => onPress(entry)} onUpdate={() => onUpdate(entry)} />;
 };
 
 export default DreamJournalSampleCard;
