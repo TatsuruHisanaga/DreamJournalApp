@@ -88,6 +88,7 @@ const DreamJournalCommonCard: React.FC<DreamJournalCommonCardProps> = ({
               ]}
             />
           ))}
+      <Surface style={styles.card as StyleProp<ViewStyle>} elevation={0}>
         </View>
       )}
       <Text style={styles.details}>{entry.details}</Text>
@@ -119,6 +120,8 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     marginHorizontal: 16,
     backgroundColor: '#fff',
+    borderColor: '#0000331A', // 10% opacity blueish black
+    borderWidth: 1,
   },
   header: {
     flexDirection: 'row',
